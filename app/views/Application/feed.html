@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <link rel="icon" href="../../../public/images/favicon.png" />
 
     <title>Starter Template for Bootstrap</title>
 
@@ -22,7 +23,17 @@
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="../../../public/javascripts/bootstrap.min.js"></script>
 
-<p>Let's go.</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12 top-bar">
+            <span>
+                <a href="@{controllers.Application.feed()}">
+                    <img src="../../../public/images/logo.png" alt="Travo"/>
+                </a>
+            </span>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
