@@ -6,12 +6,13 @@
     background: -o-linear-gradient(#252525, #101010);
     background: -moz-linear-gradient(#252525, #101010);
     background: linear-gradient(#252525, #101010);
+    padding-left: 47%;
 }
 
 .top-bar img {
     width: 70px;
     height: 50px;
-    margin: 7px 0 0 45%;
+    margin-top: 7px;
     display: inline-block;
 }
 
