@@ -1,6 +1,14 @@
 package controllers;
 
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.time.LocalDateTime;
+
+import org.apache.commons.io.IOUtils;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import play.*;
 import play.mvc.*;
 
@@ -22,6 +30,8 @@ public class Application extends Controller {
     }
 
     public static void feed() {
+
+        // ======================= TWITTER ===========================
         ConfigurationBuilder cb = new ConfigurationBuilder();
         cb.setDebugEnabled(true)
                 .setOAuthConsumerKey("t3Hs7gFXcPG6IOAhqtX0rlbF1")
@@ -50,7 +60,51 @@ public class Application extends Controller {
         for (LocalDateTime ldt : twitterDates) {
             twitterDateStrings.add(ldt.format(formatter));
         }
-        render(statuses, twitterDateStrings);
+
+        // ======================= YOUTUBE ===========================
+        final String YOUTUBE_KEY = "AIzaSyCMHwtenY0WUR2V5fZGonSYye9g6SoJ0wo";
+        String youtubeUser = "LILUZIVERT";
+
+        String body = "";
+        URL url = null;
+        try {
+            url = new URL("https://www.googleapis.com/youtube/v3/channels?part=contentDetails&forUsername=" + youtubeUser + "&key=" + YOUTUBE_KEY);
+            URLConnection connection = url.openConnection();
+            InputStream in = connection.getInputStream();
+            String encoding = connection.getContentEncoding();
+            encoding = encoding == null ? "UTF-8" : encoding;
+            body = IOUtils.toString(url, encoding);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        JSONObject obj = new JSONObject(body);
+        JSONArray arr = obj.getJSONArray("items");
+        String playlistID = arr.getJSONObject(0).getJSONObject("contentDetails")
+                .getJSONObject("relatedPlaylists").getString("uploads");
+
+        try {
+            url = new URL("https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&playlistId=" + playlistID + "&key=" + YOUTUBE_KEY);
+            URLConnection connection = url.openConnection();
+            InputStream in = connection.getInputStream();
+            String encoding = connection.getContentEncoding();
+            encoding = encoding == null ? "UTF-8" : encoding;
+            body = IOUtils.toString(url, encoding);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(body);
+
+        obj = new JSONObject(body);
+        arr = obj.getJSONArray("items");
+        String videoID = arr.getJSONObject(0).getJSONObject("contentDetails").getString("videoId");
+        String videoDate = arr.getJSONObject(0).getJSONObject("contentDetails").getString("videoPublishedAt");
+
+        YoutubeVideo firstVideo = new YoutubeVideo(videoID, videoDate);
+
+        // ======================= (RENDER) ===========================
+        render(statuses, twitterDateStrings, firstVideo);
     }
 
 }

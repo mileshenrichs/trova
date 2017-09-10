@@ -3,3 +3,4 @@
 require:
     - play
     - org.twitter4j -> twitter4j-core 4.0.4
+    - org.json -> json 20160810
