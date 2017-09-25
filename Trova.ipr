@@ -6,6 +6,15 @@
     </profile>
     <version value="1.0" />
   </component>
+  <component name="ProjectDictionaryState">
+    <dictionary name="Henrichs">
+      <words>
+        <w>insta</w>
+        <w>instagram</w>
+        <w>liluzivert</w>
+      </words>
+    </dictionary>
+  </component>
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Trova.iml" filepath="$PROJECT_DIR$/Trova.iml" />

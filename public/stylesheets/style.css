@@ -6,7 +6,7 @@
     background: -o-linear-gradient(#252525, #101010);
     background: -moz-linear-gradient(#252525, #101010);
     background: linear-gradient(#252525, #101010);
-    padding-left: 47%;
+    padding-left: 48%;
 }
 
 .top-bar img {
@@ -30,16 +30,47 @@
 }
 
 #tweet {
-    margin: 36px 0 0 32%;
+    margin: 36px 0 0 31.3%;
 }
 
-.twitter-row {
+.youtube iframe {
+    margin: 26px 0 0 31.4%;
+}
+
+.content-row {
     width: 100%;
-    height: 250px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.twitter {
     background: #326ada;
     background: -webkit-linear-gradient(#5B95DA, #B4C4DA);
     background: -o-linear-gradient(#5B95DA, #B4C4DA);
     background: -moz-linear-gradient(#5B95DA, #B4C4DA);
     background: linear-gradient(#5B95DA, #B4C4DA);
-    border-bottom: .5px solid rgba(0, 0, 0, 0.1);
+    height: 275px;
 }
+
+.youtube {
+    background: #cc181e;
+    background: -webkit-linear-gradient(#CC181E, #DE7C77);
+    background: -o-linear-gradient(#CC181E, #DE7C77);
+    background: -moz-linear-gradient(#CC181E, #DE7C77);
+    background: linear-gradient(#CC181E, #DE7C77);
+    height: 325px;
+}
+
+.instagram {
+    background: #125688;
+    background: -webkit-linear-gradient(#125688, #FA8B43);
+    background: -o-linear-gradient(#125688, #FA8B43);
+    background: -moz-linear-gradient(#125688, #FA8B43);
+    background: linear-gradient(#125688, #FA8B43);
+    height: 550px;
+}
+
+.insta-positioning {
+    display: block;
+    margin: 25px 0 0 37%;
+}
+

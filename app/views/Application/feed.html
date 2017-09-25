@@ -19,6 +19,7 @@
 <body>
 
 <script id="twitter-wjs" type="text/javascript" async defer src="//platform.twitter.com/widgets.js"></script>
+<script async defer src="//platform.instagram.com/en_US/embeds.js"></script>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -57,11 +58,11 @@
     </div>
 
     <div class="row">
-        <div class="col-lg-12 twitter-row">
+        <div class="col-lg-12 content-row twitter">
             <div id="tweet"></div>
             <script>
                 twttr.widgets.createTweet(
-                        '${statuses.get(0).getId().toString()}',
+                        '${statuses.get(1).getId().toString()}',
                         document.getElementById('tweet'),
                         {
                             theme: 'light'
@@ -72,10 +73,24 @@
     </div>
 
     <div class="row">
-        <div class="col-lg-12 youtube-row">
-            <iframe width="427" height="240" src="https://www.youtube.com/embed/${firstVideo.getVideoID()}?rel=0" frameborder="0" allowfullscreen></iframe>
+        <div class="col-lg-12 content-row youtube">
+            <iframe width="489" height="275" src="https://www.youtube.com/embed/${firstVideo.getVideoID()}?rel=0" frameborder="0" allowfullscreen></iframe>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-lg-12 content-row instagram">
+            <span class="insta-positioning">
+                #{verbatim}
+                    ${firstInstaPost}
+                #{/verbatim}
+            </span>
+        </div>
+    </div>
+
+    <br /> <br /> <br />
+    <p>A <code>p</code> here.</p>
+    <br /> <br /> <br />
 </div>
 
 </body>

@@ -1,7 +1,6 @@
 package controllers;
 
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.time.LocalDateTime;
@@ -103,8 +102,50 @@ public class Application extends Controller {
 
         YoutubeVideo firstVideo = new YoutubeVideo(videoID, videoDate);
 
+        // ======================= INSTAGRAM ===========================
+
+        String instaUser = "liluzivert";
+
+        String instaBody = "";
+        URL instaURL = null;
+
+        try {
+            instaURL = new URL("https://www.instagram.com/" + instaUser + "/media/");
+            URLConnection urlConnection = instaURL.openConnection();
+            InputStream in = urlConnection.getInputStream();
+            String encoding = urlConnection.getContentEncoding();
+            encoding = encoding == null ? "UTF-8" : encoding;
+            instaBody = IOUtils.toString(instaURL, encoding);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        JSONObject instaObj = new JSONObject(instaBody);
+        JSONArray instaArr = instaObj.getJSONArray("items");
+        String postID = instaArr.getJSONObject(0).getString("code");
+
+        try {
+            instaURL = new URL("https://api.instagram.com/oembed/?url=http://instagr.am/p/" + postID + "/");
+            URLConnection urlConnection = instaURL.openConnection();
+            InputStream in = urlConnection.getInputStream();
+            String encoding = urlConnection.getContentEncoding();
+            encoding = encoding == null ? "UTF-8" : encoding;
+            instaBody = IOUtils.toString(instaURL, encoding);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        instaObj = new JSONObject(instaBody);
+        String embedHTML = instaObj.getString("html");
+
+        embedHTML = embedHTML.substring(0, embedHTML.length() - 76);
+        embedHTML = embedHTML.replace("max-width:658px;", "max-width:350px;");
+        embedHTML = embedHTML.substring(0, 91) + "height: 510px; " + embedHTML.substring(92);
+
+        String firstInstaPost = embedHTML;
+
         // ======================= (RENDER) ===========================
-        render(statuses, twitterDateStrings, firstVideo);
+        render(statuses, twitterDateStrings, firstVideo, firstInstaPost);
     }
 
 }
