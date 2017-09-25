@@ -8,3 +8,5 @@ Trova is built using:
 - Javascript
 - Java
 - Twitter APIs
+- YouTube APIs
+- Instagram APIs
