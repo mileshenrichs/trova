@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
  * A single social media post.
  */
 
-public class Post {
+public class Post implements Comparable<Post> {
     public LocalDateTime date;
     public MEDIA_TYPE mediaType;
     public Tweet tweet;
@@ -47,4 +47,10 @@ public class Post {
         return this.instaPost;
     }
 
+    @Override
+    public int compareTo(Post post) {
+        if(this.date.isBefore(post.date)) return 1;
+        else if(this.date.isAfter(post.date)) return -1;
+        else return 0;
+    }
 }

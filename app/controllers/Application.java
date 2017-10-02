@@ -17,23 +17,24 @@ public class Application extends Controller {
     }
 
     public static void feed() {
-
         List<Post> posts = new ArrayList<>();
 
         List<Tweet> tweets = getTweets("liluzivert");
-        Tweet tweet1 = tweets.get(0);
-        posts.add(new Post(tweet1));
+        for(Tweet tweet : tweets) {
+            posts.add(new Post(tweet));
+        }
 
         List<YoutubeVideo> videos = getVideos("LILUZIVERT");
-        YoutubeVideo video1 = videos.get(0);
-        posts.add(new Post(video1));
+        for(YoutubeVideo video : videos) {
+            posts.add(new Post(video));
+        }
 
         List<InstaPost> instaPosts = getInstaPosts("liluzivert");
-        InstaPost post1 = instaPosts.get(0);
-        posts.add(new Post(post1));
+        for(InstaPost post : instaPosts) {
+            posts.add(new Post(post));
+        }
 
-
-        // ======================= (RENDER) ===========================
+        Collections.sort(posts);
         render(posts);
     }
 

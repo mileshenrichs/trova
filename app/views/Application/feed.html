@@ -61,11 +61,11 @@
         <div class="row">
             #{if post.getType() == models.MEDIA_TYPE.TWITTER}
                 <div class="col-lg-12 content-row twitter">
-                    <div id="tweet"></div>
+                    <div class="tweet"></div>
                     <script>
                         twttr.widgets.createTweet(
                                 '${post.getTweet().getTweetId()}',
-                                document.getElementById('tweet'),
+                                document.getElementsByClassName('tweet'),
                                 {
                                     theme: 'light'
                                 }
