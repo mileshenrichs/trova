@@ -4,9 +4,10 @@ import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,13 +18,19 @@ import java.util.List;
 public class InstaPost {
 
     public String instaEmbedHTML;
+    public LocalDateTime instaPostDate;
 
-    public InstaPost(String html) {
+    public InstaPost(String html, LocalDateTime date) {
         this.instaEmbedHTML = html;
+        this.instaPostDate = date;
     }
 
     public String getHTML() {
         return this.instaEmbedHTML;
+    }
+
+    public LocalDateTime getPostDate() {
+        return this.instaPostDate;
     }
 
     public static List<InstaPost> getInstaPosts(String username) {
@@ -61,9 +68,13 @@ public class InstaPost {
             instaObj = new JSONObject(instaBody);
             String embedHTML = instaObj.getString("html");
 
+            int dateIndex = embedHTML.indexOf("datetime");
+            String dateString = embedHTML.substring(dateIndex + 10, dateIndex + 35);
+            DateTimeFormatter formatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME;
+
             embedHTML = embedHTML.substring(0, embedHTML.length() - 76);
             embedHTML = embedHTML.replace("max-width:658px;", "max-width:350px;");
-            instaPosts.add(new InstaPost(embedHTML));
+            instaPosts.add(new InstaPost(embedHTML, LocalDateTime.parse(dateString, formatter)));
         }
 
         return instaPosts;

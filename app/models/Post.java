@@ -13,22 +13,38 @@ public class Post {
     public YoutubeVideo youtubeVideo;
     public InstaPost instaPost;
 
-    public Post(LocalDateTime date, Tweet tweet) {
+    public Post(Tweet tweet) {
         this.mediaType = MEDIA_TYPE.TWITTER;
-        this.date = date;
+        this.date = tweet.getTweetDate();
         this.tweet = tweet;
     }
 
-    public Post(LocalDateTime date, YoutubeVideo video) {
+    public Post(YoutubeVideo video) {
         this.mediaType = MEDIA_TYPE.YOUTUBE;
-        this.date = date;
+        this.date = video.getVideoDate();
         this.youtubeVideo = video;
     }
 
-    public Post(LocalDateTime date, InstaPost post) {
+    public Post(InstaPost post) {
         this.mediaType = MEDIA_TYPE.INSTAGRAM;
-        this.date = date;
+        this.date = post.getPostDate();
         this.instaPost = post;
+    }
+
+    public MEDIA_TYPE getType() {
+        return this.mediaType;
+    }
+
+    public Tweet getTweet() {
+        return this.tweet;
+    }
+
+    public YoutubeVideo getVideo() {
+        return this.youtubeVideo;
+    }
+
+    public InstaPost getPost() {
+        return this.instaPost;
     }
 
 }

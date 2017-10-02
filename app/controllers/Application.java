@@ -18,20 +18,23 @@ public class Application extends Controller {
 
     public static void feed() {
 
-        // ======================= TWITTER ===========================
+        List<Post> posts = new ArrayList<>();
+
         List<Tweet> tweets = getTweets("liluzivert");
+        Tweet tweet1 = tweets.get(0);
+        posts.add(new Post(tweet1));
 
-
-        // ======================= YOUTUBE ===========================
         List<YoutubeVideo> videos = getVideos("LILUZIVERT");
+        YoutubeVideo video1 = videos.get(0);
+        posts.add(new Post(video1));
 
-
-        // ======================= INSTAGRAM ===========================
         List<InstaPost> instaPosts = getInstaPosts("liluzivert");
+        InstaPost post1 = instaPosts.get(0);
+        posts.add(new Post(post1));
 
 
         // ======================= (RENDER) ===========================
-        render(tweets, videos, instaPosts);
+        render(posts);
     }
 
 }

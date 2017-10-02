@@ -57,36 +57,40 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-lg-12 content-row twitter">
-            <div id="tweet"></div>
-            <script>
-                twttr.widgets.createTweet(
-                        '${tweets.get(1).getPostId()}',
-                        document.getElementById('tweet'),
-                        {
-                            theme: 'light'
-                        }
-                );
-            </script>
-        </div>
-    </div>
+    #{list posts, as: 'post'}
+        <div class="row">
+            #{if post.getType() == models.MEDIA_TYPE.TWITTER}
+                <div class="col-lg-12 content-row twitter">
+                    <div id="tweet"></div>
+                    <script>
+                        twttr.widgets.createTweet(
+                                '${post.getTweet().getTweetId()}',
+                                document.getElementById('tweet'),
+                                {
+                                    theme: 'light'
+                                }
+                        );
+                    </script>
+                </div>
+            #{/if}
 
-    <div class="row">
-        <div class="col-lg-12 content-row youtube">
-            <iframe width="489" height="275" src="https://www.youtube.com/embed/${videos.get(0).getVideoId()}?rel=0" frameborder="0" allowfullscreen></iframe>
-        </div>
-    </div>
+            #{elseif post.getType() == models.MEDIA_TYPE.YOUTUBE}
+                <div class="col-lg-12 content-row youtube">
+                    <iframe width="489" height="275" src="https://www.youtube.com/embed/${post.getVideo().getVideoId()}?rel=0" frameborder="0" allowfullscreen></iframe>
+                </div>
+            #{/elseif}
 
-    <div class="row">
-        <div class="col-lg-12 content-row instagram">
-            <span class="insta-positioning">
-                #{verbatim}
-                    ${instaPosts.get(0).getHTML()}
-                #{/verbatim}
-            </span>
+            #{elseif post.getType() == models.MEDIA_TYPE.INSTAGRAM}
+                <div class="col-lg-12 content-row instagram">
+                    <span class="insta-positioning">
+                        #{verbatim}
+                            ${post.getPost().getHTML()}
+                        #{/verbatim}
+                    </span>
+                </div>
+            #{/elseif}
         </div>
-    </div>
+    #{/list}
 
     <br /> <br /> <br />
     <p>A <code>p</code> here.</p>

@@ -4,7 +4,6 @@ import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
 import java.time.LocalDateTime;
@@ -38,12 +37,11 @@ public class YoutubeVideo {
         List<YoutubeVideo> videos = new ArrayList<>();
 
         final String YOUTUBE_KEY = "AIzaSyCMHwtenY0WUR2V5fZGonSYye9g6SoJ0wo";
-        String youtubeUser = username;
 
         String body = "";
         URL url = null;
         try {
-            url = new URL("https://www.googleapis.com/youtube/v3/channels?part=contentDetails&forUsername=" + youtubeUser + "&key=" + YOUTUBE_KEY);
+            url = new URL("https://www.googleapis.com/youtube/v3/channels?part=contentDetails&forUsername=" + username + "&key=" + YOUTUBE_KEY);
             URLConnection connection = url.openConnection();
             String encoding = connection.getContentEncoding();
             encoding = encoding == null ? "UTF-8" : encoding;

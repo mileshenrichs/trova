@@ -25,11 +25,11 @@ public class Tweet {
         this.postDate = date;
     }
 
-    public String getPostId() {
+    public String getTweetId() {
         return this.twitterPostId;
     }
 
-    public LocalDateTime getPostDate() {
+    public LocalDateTime getTweetDate() {
         return this.postDate;
     }
 
