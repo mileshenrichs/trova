@@ -29,6 +29,51 @@
     transform: scale(1.15);
 }
 
+.person-details {
+    background-color: #252525;
+    padding: 20px 0 0 220px;
+    height: 300px;
+    border-bottom: 5px solid #101010;
+}
+
+.person-details #profile-pic {
+    width: 225px;
+    height: 225px;
+    border: solid 8px #101010;
+    display: inline-block;
+}
+
+.person-details #wiki {
+    float: right;
+    position: relative;
+    left: -65px;
+    display: inline-block;
+    width: 825px;
+    color: #A8A8A8;
+    line-height: 23px;
+}
+
+.person-details #wiki i {
+    font-size: 9px;
+    position: relative;
+    bottom: 4px;
+    left: 2px;
+}
+
+.person-details #social-links {
+    float: right;
+    width: 300px;
+    position: relative;
+    top: -90px;
+    left: -580px;
+    list-style-type: none;
+    line-height: 28px;
+}
+
+.person-details #social-links li a {
+    color: #A8A8A8;
+}
+
 #tweet {
     margin: 36px 0 0 31.3%;
 }
