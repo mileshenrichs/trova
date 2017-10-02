@@ -62,7 +62,7 @@
             <div id="tweet"></div>
             <script>
                 twttr.widgets.createTweet(
-                        '${statuses.get(1).getId().toString()}',
+                        '${tweets.get(1).getPostId()}',
                         document.getElementById('tweet'),
                         {
                             theme: 'light'
@@ -74,7 +74,7 @@
 
     <div class="row">
         <div class="col-lg-12 content-row youtube">
-            <iframe width="489" height="275" src="https://www.youtube.com/embed/${firstVideo.getVideoID()}?rel=0" frameborder="0" allowfullscreen></iframe>
+            <iframe width="489" height="275" src="https://www.youtube.com/embed/${videos.get(0).getVideoId()}?rel=0" frameborder="0" allowfullscreen></iframe>
         </div>
     </div>
 
@@ -82,7 +82,7 @@
         <div class="col-lg-12 content-row instagram">
             <span class="insta-positioning">
                 #{verbatim}
-                    ${firstInstaPost}
+                    ${instaPosts.get(0).getHTML()}
                 #{/verbatim}
             </span>
         </div>
