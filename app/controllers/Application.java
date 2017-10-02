@@ -140,7 +140,6 @@ public class Application extends Controller {
 
         embedHTML = embedHTML.substring(0, embedHTML.length() - 76);
         embedHTML = embedHTML.replace("max-width:658px;", "max-width:350px;");
-        embedHTML = embedHTML.substring(0, 91) + "height: 510px; " + embedHTML.substring(92);
 
         String firstInstaPost = embedHTML;
 

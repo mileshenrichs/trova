@@ -66,11 +66,11 @@
     background: -o-linear-gradient(#125688, #FA8B43);
     background: -moz-linear-gradient(#125688, #FA8B43);
     background: linear-gradient(#125688, #FA8B43);
-    height: 550px;
+    height: 560px;
 }
 
 .insta-positioning {
     display: block;
-    margin: 25px 0 0 37%;
+    margin: 15px 0 0 37%;
 }
 
