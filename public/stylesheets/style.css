@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:700');
+
+h1, a, ul li a {
+    transition: all 0.3s linear;
+}
+
 .top-bar {
     width: 100%;
     height: 65px;
@@ -31,47 +37,101 @@
 
 .person-details {
     background-color: #252525;
-    padding: 20px 0 0 220px;
-    height: 300px;
+    padding: 20px 20px 0 175px;
+    height: 350px;
     border-bottom: 5px solid #101010;
 }
 
 .person-details #profile-pic {
-    width: 225px;
-    height: 225px;
+    width: 240px;
+    height: 240px;
     border: solid 8px #101010;
     display: inline-block;
 }
 
-.person-details #wiki {
+.person-details span.header-right-column {
+    width: 880px;
     float: right;
-    position: relative;
-    left: -65px;
+}
+
+.person-details h1 {
+    font-family: 'Source Sans Pro', sans-serif;
+    letter-spacing: 1px;
+    font-size: 43px;
+    margin-top: 10px;
+    color: #D1D1D1;
+    text-shadow: 1px 2px 2px rgba(0, 0, 0, 0.8);
+    cursor: pointer;
     display: inline-block;
-    width: 825px;
+}
+
+.person-details h1:hover {
+    text-shadow: 2px 3px 3px #000;
+    color: #EDE21B;
+}
+
+.person-details #wiki {
+    display: inline-block;
     color: #A8A8A8;
-    line-height: 23px;
+    line-height: 22px;
+}
+
+.person-details #wiki a {
+    color: #EDE21B;
 }
 
 .person-details #wiki i {
     font-size: 9px;
     position: relative;
-    bottom: 4px;
+    bottom: 5px;
     left: 2px;
 }
 
 .person-details #social-links {
-    float: right;
     width: 300px;
-    position: relative;
-    top: -90px;
-    left: -580px;
     list-style-type: none;
-    line-height: 28px;
+    line-height: 40px;
+    padding: 0;
+    font-size: 15px;
 }
 
 .person-details #social-links li a {
     color: #A8A8A8;
+    border-bottom: 1px solid rgba(168, 168, 168, 0);
+    padding-bottom: -2px;
+}
+
+.person-details #social-links li a:hover {
+    text-decoration: none;
+}
+
+.person-details #social-links li a.insta-link:hover {
+    color: #FBAD50;
+    border-bottom: 1px solid rgba(251, 173, 80, 1);
+}
+
+.person-details #social-links li a.twitter-link:hover {
+    color: #1dcaff;
+    border-bottom: 1px solid rgba(29, 202, 255, 1);
+}
+
+.person-details #social-links li a.youtube-link:hover {
+    color: #F22D21;
+    border-bottom: 1px solid rgba(242, 45, 33, 1);
+}
+
+.person-details ul li img {
+    width: 19px;
+    height: 19px;
+    position: relative;
+    bottom: 2px;
+    display: inline-block;
+    margin-right: 3px;
+}
+
+.person-details ul li img.youtube-logo {
+    width: 20px;
+    height: 16px;
 }
 
 #tweet {
