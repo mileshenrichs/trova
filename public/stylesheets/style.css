@@ -4,6 +4,13 @@ h1, a, ul li a {
     transition: all 0.3s linear;
 }
 
+.content-row {
+    width: 100%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+/* =================== NAV STYLES =================== */
+
 .top-bar {
     width: 100%;
     height: 65px;
@@ -34,6 +41,8 @@ h1, a, ul li a {
     -o-transform: scale(1.15);
     transform: scale(1.15);
 }
+
+/* =================== PERSON DETAILS STYLES =================== */
 
 .person-details {
     background-color: #252525;
@@ -74,10 +83,17 @@ h1, a, ul li a {
     display: inline-block;
     color: #A8A8A8;
     line-height: 22px;
+    margin-bottom: 20px;
 }
 
 .person-details #wiki a {
     color: #EDE21B;
+    border-bottom: 1px solid rgba(168, 168, 168, 0);
+}
+
+.person-details #wiki a:hover {
+    border-bottom: 1px solid rgba(237, 225, 27, 1);
+    text-decoration: none;
 }
 
 .person-details #wiki i {
@@ -90,7 +106,7 @@ h1, a, ul li a {
 .person-details #social-links {
     width: 300px;
     list-style-type: none;
-    line-height: 40px;
+    line-height: 30px;
     padding: 0;
     font-size: 15px;
 }
@@ -134,17 +150,15 @@ h1, a, ul li a {
     height: 16px;
 }
 
-#tweet {
-    margin: 36px 0 0 31.3%;
+/* =================== TWITTER STYLES =================== */
+
+.tweet-center {
+    margin: 15px 0 0 32%;
 }
 
-.youtube iframe {
-    margin: 26px 0 0 31.4%;
-}
-
-.content-row {
-    width: 100%;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+.tweet-center-tall {
+    margin: 15px 0 0 37%;
+    width: 275px;
 }
 
 .twitter {
@@ -153,7 +167,21 @@ h1, a, ul li a {
     background: -o-linear-gradient(#5B95DA, #B4C4DA);
     background: -moz-linear-gradient(#5B95DA, #B4C4DA);
     background: linear-gradient(#5B95DA, #B4C4DA);
-    height: 275px;
+    height: 315px;
+}
+
+.twit-tall {
+    height: 585px;
+}
+
+.twit-wide {
+    height: 460px;
+}
+
+/* =================== YOUTUBE STYLES =================== */
+
+.youtube iframe {
+    margin: 26px 0 0 31.4%;
 }
 
 .youtube {
@@ -164,6 +192,8 @@ h1, a, ul li a {
     background: linear-gradient(#CC181E, #DE7C77);
     height: 325px;
 }
+
+/* =================== INSTAGRAM STYLES =================== */
 
 .instagram {
     background: #125688;
@@ -178,4 +208,3 @@ h1, a, ul li a {
     display: block;
     margin: 15px 0 0 37%;
 }
-
