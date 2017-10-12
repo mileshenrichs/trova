@@ -7,7 +7,7 @@ h1, a, ul li a {
 
 .content-row {
     width: 100%;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
 }
 
 /* =================== NAV STYLES =================== */
@@ -182,11 +182,11 @@ h1, a, ul li a {
 }
 
 .twitter {
-    background: #326ada;
-    background: -webkit-linear-gradient(#5B95DA, #B4C4DA);
-    background: -o-linear-gradient(#5B95DA, #B4C4DA);
-    background: -moz-linear-gradient(#5B95DA, #B4C4DA);
-    background: linear-gradient(#5B95DA, #B4C4DA);
+    background: #008EC4;
+    background: -webkit-radial-gradient(circle, #008EC4, #003C52);
+    background: -o-radial-gradient(circle, #008EC4, #003C52);
+    background: -moz-radial-gradient(circle, #008EC4, #003C52);
+    background: radial-gradient(circle, #008EC4, #003C52);
     height: 315px;
 }
 
@@ -205,22 +205,22 @@ h1, a, ul li a {
 }
 
 .youtube {
-    background: #cc181e;
-    background: -webkit-linear-gradient(#CC181E, #DE7C77);
-    background: -o-linear-gradient(#CC181E, #DE7C77);
-    background: -moz-linear-gradient(#CC181E, #DE7C77);
-    background: linear-gradient(#CC181E, #DE7C77);
-    height: 325px;
+    background: #C20000;
+    background: -webkit-radial-gradient(circle, #C20000, #7F0000);
+    background: -o-radial-gradient(circle, #C20000, #7F0000);
+    background: -moz-radial-gradient(circle, #C20000, #7F0000);
+    background: radial-gradient(circle, #C20000, #7F0000);
+    height: 375px;
 }
 
 /* =================== INSTAGRAM STYLES =================== */
 
 .instagram {
-    background: #125688;
-    background: -webkit-linear-gradient(#125688, #FA8B43);
-    background: -o-linear-gradient(#125688, #FA8B43);
-    background: -moz-linear-gradient(#125688, #FA8B43);
-    background: linear-gradient(#125688, #FA8B43);
+    background: #5F287F;
+    background: -webkit-radial-gradient(circle, #C92E94, #5F287F);
+    background: -o-radial-gradient(circle, #C92E94, #5F287F);
+    background: -moz-radial-gradient(circle, #C92E94, #5F287F);
+    background: radial-gradient(circle, #C92E94, #5F287F);
     height: 575px;
 }
 

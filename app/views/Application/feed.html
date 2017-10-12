@@ -74,37 +74,37 @@
         </div>
     </div>
 
-    *{#{list posts, as: 'post'}}*
-        *{<div class="row">}*
-            *{#{if post.getType() == models.MEDIA_TYPE.TWITTER}}*
-                *{<div class="col-lg-12 content-row twitter#{if post.getTweet().getAttachmentRatio() == models.Tweet.ATTACHMENT_RATIO.TALL} twit-tall#{/if}#{elseif post.getTweet().getAttachmentRatio() == models.Tweet.ATTACHMENT_RATIO.WIDE} twit-wide#{/elseif}">}*
-                    *{<div class="tweet-center#{if post.getTweet().getAttachmentRatio() == models.Tweet.ATTACHMENT_RATIO.TALL}-tall#{/if}">}*
-                        *{<blockquote class="twitter-tweet" data-lang="en">}*
-                            *{<p lang="en" dir="ltr">${post.getTweet().getStatus().getText()}</p>&mdash;}*
-                            *{${post.getTweet().getStatus().getUser().getName()} (@${post.getTweet().getStatus().getUser().getScreenName()})}*
-                            *{<a href="https://twitter.com/${post.getTweet().getStatus().getUser().getScreenName()}/status/${post.getTweet().getStatus().getId()}">${post.getTweet().getDisplayDate()}</a>}*
-                        *{</blockquote>}*
-                    *{</div>}*
-                *{</div>}*
-            *{#{/if}}*
+    #{list posts, as: 'post'}
+        <div class="row">
+            #{if post.getType() == models.MEDIA_TYPE.TWITTER}
+                <div class="col-lg-12 content-row twitter#{if post.getTweet().getAttachmentRatio() == models.Tweet.ATTACHMENT_RATIO.TALL} twit-tall#{/if}#{elseif post.getTweet().getAttachmentRatio() == models.Tweet.ATTACHMENT_RATIO.WIDE} twit-wide#{/elseif}">
+                    <div class="tweet-center#{if post.getTweet().getAttachmentRatio() == models.Tweet.ATTACHMENT_RATIO.TALL}-tall#{/if}">
+                        <blockquote class="twitter-tweet" data-lang="en">
+                            <p lang="en" dir="ltr">${post.getTweet().getStatus().getText()}</p>&mdash;
+                            ${post.getTweet().getStatus().getUser().getName()} (@${post.getTweet().getStatus().getUser().getScreenName()})
+                            <a href="https://twitter.com/${post.getTweet().getStatus().getUser().getScreenName()}/status/${post.getTweet().getStatus().getId()}">${post.getTweet().getDisplayDate()}</a>
+                        </blockquote>
+                    </div>
+                </div>
+            #{/if}
 
-            *{#{elseif post.getType() == models.MEDIA_TYPE.YOUTUBE}}*
-                *{<div class="col-lg-12 content-row youtube">}*
-                    *{<iframe width="489" height="275" src="https://www.youtube.com/embed/${post.getVideo().getVideoId()}?rel=0" frameborder="0" allowfullscreen></iframe>}*
-                *{</div>}*
-            *{#{/elseif}}*
+            #{elseif post.getType() == models.MEDIA_TYPE.YOUTUBE}
+                <div class="col-lg-12 content-row youtube">
+                    <iframe width="551" height="310" src="https://www.youtube.com/embed/${post.getVideo().getVideoId()}?rel=0" frameborder="0" allowfullscreen></iframe>
+                </div>
+            #{/elseif}
 
-            *{#{elseif post.getType() == models.MEDIA_TYPE.INSTAGRAM}}*
-                *{<div class="col-lg-12 content-row instagram">}*
-                    *{<span class="insta-positioning">}*
-                        *{#{verbatim}}*
-                            *{${post.getPost().getHTML()}}*
-                        *{#{/verbatim}}*
-                    *{</span>}*
-                *{</div>}*
-            *{#{/elseif}}*
-        *{</div>}*
-    *{#{/list}}*
+            #{elseif post.getType() == models.MEDIA_TYPE.INSTAGRAM}
+                <div class="col-lg-12 content-row instagram">
+                    <span class="insta-positioning">
+                        #{verbatim}
+                            ${post.getPost().getHTML()}
+                        #{/verbatim}
+                    </span>
+                </div>
+            #{/elseif}
+        </div>
+    #{/list}
 
     <br /> <br /> <br />
     <p>A <code>p</code> here.</p>
