@@ -66,45 +66,45 @@
                 &nbsp;<a href="https://en.wikipedia.org/wiki/Lil_Uzi_Vert" target="_blank">Bio from Wikipedia<i class="fa fa-external-link" aria-hidden="true"></i></a>
                 </p>
                 <ul id="social-links">
-                    <li><img src="../../../public/images/social-media-icons/instagram.png" /> <a class="insta-link" href="https://twitter.com/LILUZIVERT" target="_blank">Instagram</a></li>
-                    <li><img src="../../../public/images/social-media-icons/twitter.png" /> <a class="twitter-link" href="https://www.instagram.com/liluzivert" target="_blank">Twitter</a></li>
-                    <li><img class="youtube-logo" src="../../../public/images/social-media-icons/youtube.png" /> <a class="youtube-link" href="https://www.youtube.com/user/LILUZIVERT" target="_blank">YouTube</a></li>
+                    <li><img src="../../../public/images/social-media-icons/instagram.png" /> <a class="insta-link" href="https://www.instagram.com/liluzivert" target="_blank">Instagram</a> <span class="insta-followers" title="${person.getName()} has ${person.getInstaFollowers()} followers on Instagram">${person.getInstaFollowers()}</span></li>
+                    <li><img src="../../../public/images/social-media-icons/twitter.png" /> <a class="twitter-link" href="https://twitter.com/LILUZIVERT" target="_blank">Twitter</a> <span class="twitter-followers" title="${person.getName()} has ${person.getTwitterFollowers()} followers on Twitter">${person.getTwitterFollowers()}</span> </li>
+                    <li><img class="youtube-logo" src="../../../public/images/social-media-icons/youtube.png" /> <a class="youtube-link" href="https://www.youtube.com/user/LILUZIVERT" target="_blank">YouTube</a> <span class="youtube-followers" title="${person.getName()} has ${person.getYoutubeFollowers()} followers on YouTube">${person.getYoutubeFollowers()}</span></li>
                 </ul>
             </span>
         </div>
     </div>
 
-    #{list posts, as: 'post'}
-        <div class="row">
-            #{if post.getType() == models.MEDIA_TYPE.TWITTER}
-                <div class="col-lg-12 content-row twitter#{if post.getTweet().getAttachmentRatio() == models.Tweet.ATTACHMENT_RATIO.TALL} twit-tall#{/if}#{elseif post.getTweet().getAttachmentRatio() == models.Tweet.ATTACHMENT_RATIO.WIDE} twit-wide#{/elseif}">
-                    <div class="tweet-center#{if post.getTweet().getAttachmentRatio() == models.Tweet.ATTACHMENT_RATIO.TALL}-tall#{/if}">
-                        <blockquote class="twitter-tweet" data-lang="en">
-                            <p lang="en" dir="ltr">${post.getTweet().getStatus().getText()}</p>&mdash;
-                            ${post.getTweet().getStatus().getUser().getName()} (@${post.getTweet().getStatus().getUser().getScreenName()})
-                            <a href="https://twitter.com/${post.getTweet().getStatus().getUser().getScreenName()}/status/${post.getTweet().getStatus().getId()}">${post.getTweet().getDisplayDate()}</a>
-                        </blockquote>
-                    </div>
-                </div>
-            #{/if}
+    *{#{list posts, as: 'post'}}*
+        *{<div class="row">}*
+            *{#{if post.getType() == models.MEDIA_TYPE.TWITTER}}*
+                *{<div class="col-lg-12 content-row twitter#{if post.getTweet().getAttachmentRatio() == models.Tweet.ATTACHMENT_RATIO.TALL} twit-tall#{/if}#{elseif post.getTweet().getAttachmentRatio() == models.Tweet.ATTACHMENT_RATIO.WIDE} twit-wide#{/elseif}">}*
+                    *{<div class="tweet-center#{if post.getTweet().getAttachmentRatio() == models.Tweet.ATTACHMENT_RATIO.TALL}-tall#{/if}">}*
+                        *{<blockquote class="twitter-tweet" data-lang="en">}*
+                            *{<p lang="en" dir="ltr">${post.getTweet().getStatus().getText()}</p>&mdash;}*
+                            *{${post.getTweet().getStatus().getUser().getName()} (@${post.getTweet().getStatus().getUser().getScreenName()})}*
+                            *{<a href="https://twitter.com/${post.getTweet().getStatus().getUser().getScreenName()}/status/${post.getTweet().getStatus().getId()}">${post.getTweet().getDisplayDate()}</a>}*
+                        *{</blockquote>}*
+                    *{</div>}*
+                *{</div>}*
+            *{#{/if}}*
 
-            #{elseif post.getType() == models.MEDIA_TYPE.YOUTUBE}
-                <div class="col-lg-12 content-row youtube">
-                    <iframe width="489" height="275" src="https://www.youtube.com/embed/${post.getVideo().getVideoId()}?rel=0" frameborder="0" allowfullscreen></iframe>
-                </div>
-            #{/elseif}
+            *{#{elseif post.getType() == models.MEDIA_TYPE.YOUTUBE}}*
+                *{<div class="col-lg-12 content-row youtube">}*
+                    *{<iframe width="489" height="275" src="https://www.youtube.com/embed/${post.getVideo().getVideoId()}?rel=0" frameborder="0" allowfullscreen></iframe>}*
+                *{</div>}*
+            *{#{/elseif}}*
 
-            #{elseif post.getType() == models.MEDIA_TYPE.INSTAGRAM}
-                <div class="col-lg-12 content-row instagram">
-                    <span class="insta-positioning">
-                        #{verbatim}
-                            ${post.getPost().getHTML()}
-                        #{/verbatim}
-                    </span>
-                </div>
-            #{/elseif}
-        </div>
-    #{/list}
+            *{#{elseif post.getType() == models.MEDIA_TYPE.INSTAGRAM}}*
+                *{<div class="col-lg-12 content-row instagram">}*
+                    *{<span class="insta-positioning">}*
+                        *{#{verbatim}}*
+                            *{${post.getPost().getHTML()}}*
+                        *{#{/verbatim}}*
+                    *{</span>}*
+                *{</div>}*
+            *{#{/elseif}}*
+        *{</div>}*
+    *{#{/list}}*
 
     <br /> <br /> <br />
     <p>A <code>p</code> here.</p>

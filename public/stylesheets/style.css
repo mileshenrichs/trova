@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:700');
+@import url('https://fonts.googleapis.com/css?family=Lato');
 
 h1, a, ul li a {
     transition: all 0.3s linear;
@@ -148,6 +149,25 @@ h1, a, ul li a {
 .person-details ul li img.youtube-logo {
     width: 20px;
     height: 16px;
+}
+
+.person-details ul li span {
+    font-family: 'Lato', sans-serif;
+}
+
+.insta-followers {
+    padding-left: 20px;
+    color: #C2863E;
+}
+
+.twitter-followers {
+    padding-left: 43px;
+    color: #1595BD;
+}
+
+.youtube-followers {
+    padding-left: 29px;
+    color: #B82219;
 }
 
 /* =================== TWITTER STYLES =================== */

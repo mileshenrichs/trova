@@ -1,20 +1,19 @@
 package models;
 
-import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.net.URL;
-import java.net.URLConnection;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import static controllers.util.URLUtil.getURLBody;
+
 /**
  * Represents a single YouTube Video with fields videoID and videoDate.
  */
-
 public class YoutubeVideo {
     private String videoID;
     private LocalDateTime videoDate;
@@ -38,14 +37,9 @@ public class YoutubeVideo {
 
         final String YOUTUBE_KEY = "AIzaSyCMHwtenY0WUR2V5fZGonSYye9g6SoJ0wo";
 
-        String body = "";
-        URL url = null;
+        String body = null;
         try {
-            url = new URL("https://www.googleapis.com/youtube/v3/channels?part=contentDetails&forUsername=" + username + "&key=" + YOUTUBE_KEY);
-            URLConnection connection = url.openConnection();
-            String encoding = connection.getContentEncoding();
-            encoding = encoding == null ? "UTF-8" : encoding;
-            body = IOUtils.toString(url, encoding);
+            body = getURLBody(new URL("https://www.googleapis.com/youtube/v3/channels?part=contentDetails&forUsername=" + username + "&key=" + YOUTUBE_KEY));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -56,11 +50,7 @@ public class YoutubeVideo {
                 .getJSONObject("relatedPlaylists").getString("uploads");
 
         try {
-            url = new URL("https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults=20&playlistId=" + playlistID + "&key=" + YOUTUBE_KEY);
-            URLConnection connection = url.openConnection();
-            String encoding = connection.getContentEncoding();
-            encoding = encoding == null ? "UTF-8" : encoding;
-            body = IOUtils.toString(url, encoding);
+            body = getURLBody(new URL("https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults=20&playlistId=" + playlistID + "&key=" + YOUTUBE_KEY));
         } catch (Exception e) {
             e.printStackTrace();
         }
