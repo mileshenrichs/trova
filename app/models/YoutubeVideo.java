@@ -37,23 +37,13 @@ public class YoutubeVideo {
 
         final String YOUTUBE_KEY = "AIzaSyCMHwtenY0WUR2V5fZGonSYye9g6SoJ0wo";
 
-        String body = null;
-        try {
-            body = getURLBody(new URL("https://www.googleapis.com/youtube/v3/channels?part=contentDetails&forUsername=" + username + "&key=" + YOUTUBE_KEY));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        String body = getURLBody("https://www.googleapis.com/youtube/v3/channels?part=contentDetails&forUsername=" + username + "&key=" + YOUTUBE_KEY);
 
         JSONObject obj = new JSONObject(body);
         JSONArray arr = obj.getJSONArray("items");
         String playlistID = arr.getJSONObject(0).getJSONObject("contentDetails")
                 .getJSONObject("relatedPlaylists").getString("uploads");
-
-        try {
-            body = getURLBody(new URL("https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults=20&playlistId=" + playlistID + "&key=" + YOUTUBE_KEY));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        body = getURLBody("https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults=20&playlistId=" + playlistID + "&key=" + YOUTUBE_KEY);
 
         obj = new JSONObject(body);
         int totalResults = obj.getJSONObject("pageInfo").getInt("totalResults");

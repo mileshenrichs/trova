@@ -1,12 +1,8 @@
 package models;
 
-import org.apache.commons.lang.StringUtils;
 import twitter4j.*;
 import twitter4j.conf.ConfigurationBuilder;
 
-import javax.swing.*;
-import java.awt.*;
-import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -16,21 +12,16 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static controllers.util.URLUtil.getURLBody;
-
 /**
  * A twitter status.
  */
-
 public class Tweet {
     public Status status;
     public LocalDateTime postDate;
-    public ATTACHMENT_RATIO ratio;
 
-    public Tweet(Status status, LocalDateTime date, ATTACHMENT_RATIO ratio) {
+    public Tweet(Status status, LocalDateTime date) {
         this.status = status;
         this.postDate = date;
-        this.ratio = ratio;
     }
 
     public Status getStatus() {
@@ -46,10 +37,6 @@ public class Tweet {
         return postDate.format(formatter);
     }
 
-    public ATTACHMENT_RATIO getAttachmentRatio() {
-        return this.ratio;
-    }
-
     public static List<Tweet> getTweets(String username) {
         List<Tweet> tweets = new ArrayList<>();
 
@@ -62,81 +49,13 @@ public class Tweet {
             for (Status s : statuses) {
                 Date statusDate = s.getCreatedAt();
                 LocalDateTime ldt = statusDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-                tweets.add(new Tweet(s, ldt, checkHasAttachment(s)));
+                tweets.add(new Tweet(s, ldt));
             }
         } catch (TwitterException e) {
             e.printStackTrace();
         }
 
         return tweets;
-    }
-
-    /**
-     * Defines whether a Tweet has an image or video attachment
-     */
-    public enum ATTACHMENT_RATIO {
-        NONE,
-        TALL,
-        WIDE
-    }
-
-    public static ATTACHMENT_RATIO checkHasAttachment(Status s) {
-        int width = 0, height = 0;
-        if(s.getText().substring(0, 2).equals("RT")) s = s.getRetweetedStatus();
-
-        String urlString = "";
-        Pattern p = Pattern.compile("https://t.co/(.*?)\\s");
-        Matcher m = p.matcher(s.getText() + " ");
-        while(m.find()) {
-            urlString += m.group();
-        }
-
-        if(!urlString.equals("")) {
-            // links to YouTube video, always wide
-            if (StringUtils.countMatches(urlString, "t.co") > 1) return ATTACHMENT_RATIO.WIDE;
-            else {
-                String body = null;
-                try {
-                    body = getURLBody(new URL(urlString));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                if(body != null) {
-                    Pattern widthPattern = Pattern.compile("property=\"og:video:width\" content=\"(\\d*?)\"");
-                    Pattern heightPattern = Pattern.compile("property=\"og:video:height\" content=\"(\\d*?)\"");
-                    Matcher widthMatcher = widthPattern.matcher(body);
-                    Matcher heightMatcher = heightPattern.matcher(body);
-
-                    if(widthMatcher.find() && heightMatcher.find()) {
-                        width = Integer.parseInt(widthMatcher.group(1));
-                        height = Integer.parseInt(heightMatcher.group(1));
-                    } else {
-                        Pattern imagePattern = Pattern.compile("property=\"og:image\" content=\"https://(.*?):(.*?)\"");
-                        Matcher imageMatcher = imagePattern.matcher(body);
-                        if(imageMatcher.find()) {
-                            URL imgURL = null;
-                            try {
-                                imgURL = new URL("https://" + imageMatcher.group(2));
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                            if(imgURL != null) {
-                                Image img = new ImageIcon(imgURL).getImage();
-                                width = img.getWidth(null);
-                                height = img.getHeight(null);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        if (width != 0 && height != 0) {
-            if (width > height) return ATTACHMENT_RATIO.WIDE;
-            else return ATTACHMENT_RATIO.TALL;
-        }
-        return ATTACHMENT_RATIO.NONE;
     }
 
     public static Twitter getTwitterInstance() {
@@ -149,6 +68,32 @@ public class Tweet {
 
         TwitterFactory tf = new TwitterFactory(cb.build());
         return tf.getInstance();
+    }
+
+    /**
+     * Return any https://t.co links contained in a Status
+     */
+    public static String getTco(String t) {
+        String urlString = "";
+        Pattern p = Pattern.compile("https://t.co/(.*?)\\s");
+        Matcher m = p.matcher(t + " ");
+        while(m.find()) {
+            urlString += m.group();
+        }
+        return urlString;
+    }
+
+    /**
+     * Returns base (original) Tweet if tweet is a retweet
+     */
+    public Tweet getBaseTweet() {
+        if(status.getText().substring(0, 2).equals("RT")) {
+            Status s = status.getRetweetedStatus();
+            Date statusDate = s.getCreatedAt();
+            LocalDateTime ldt = statusDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+            return(new Tweet(s, ldt));
+        }
+        return this;
     }
 
 }

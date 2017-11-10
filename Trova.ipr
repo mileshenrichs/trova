@@ -3,8 +3,17 @@
   <component name="InspectionProjectProfileManager">
     <profile version="1.0">
       <option name="myName" value="Project Default" />
+      <inspection_tool class="SpellCheckingInspection" enabled="false" level="TYPO" enabled_by_default="false">
+        <option name="processCode" value="true" />
+        <option name="processLiterals" value="true" />
+        <option name="processComments" value="true" />
+      </inspection_tool>
     </profile>
     <version value="1.0" />
+  </component>
+  <component name="JavaScriptLibraryMappings">
+    <file url="file://$PROJECT_DIR$" libraries="{embeds, jquery, widgets}" />
+    <file url="file://$USER_HOME$/play-1.4.4/modules/docviewer" libraries="{embeds, jquery, widgets}" />
   </component>
   <component name="Palette2">
     <group name="Swing">
@@ -130,9 +139,13 @@
   <component name="ProjectDictionaryState">
     <dictionary name="Henrichs">
       <words>
+        <w>blockdivs</w>
+        <w>blockquotes</w>
+        <w>henrichs</w>
         <w>insta</w>
         <w>instagram</w>
         <w>liluzivert</w>
+        <w>retweet</w>
       </words>
     </dictionary>
   </component>
@@ -146,5 +159,14 @@
   </component>
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
+  </component>
+  <component name="libraryTable">
+    <library name="wikipedia-parser">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/lib/wikipedia-parser.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
   </component>
 </project>

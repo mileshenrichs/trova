@@ -4,3 +4,5 @@ require:
     - play
     - org.twitter4j -> twitter4j-core 4.0.4
     - org.json -> json 20160810
+    - org.jsoup -> jsoup 1.10.3
+    - edu.stanford.nlp -> stanford-corenlp 3.8.0

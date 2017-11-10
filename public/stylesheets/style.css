@@ -173,11 +173,12 @@ h1, a, ul li a {
 /* =================== TWITTER STYLES =================== */
 
 .tweet-center {
-    margin: 15px 0 0 32%;
+    padding-top: 10px;
+    margin: 0 0 0 32%;
 }
 
 .tweet-center-tall {
-    margin: 15px 0 0 37%;
+    margin: 15px 0 0 39.5%;
     width: 275px;
 }
 
@@ -187,11 +188,19 @@ h1, a, ul li a {
     background: -o-radial-gradient(circle, #008EC4, #003C52);
     background: -moz-radial-gradient(circle, #008EC4, #003C52);
     background: radial-gradient(circle, #008EC4, #003C52);
-    height: 315px;
+    height: 200px;
+}
+
+.twit-textdense {
+    height: 250px;
 }
 
 .twit-tall {
     height: 585px;
+}
+
+.twit-shorttall {
+    height: 500px;
 }
 
 .twit-wide {

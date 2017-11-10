@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../../public/images/favicon.png" />
 
-    <title>trova</title>
+    <title>trova // ${person.getName()}</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../../../public/stylesheets/bootstrap.min.css" rel="stylesheet">
@@ -18,6 +18,7 @@
 </head>
 
 <body>
+<script id="twitter-wjs" type="text/javascript" async defer src="//platform.twitter.com/widgets.js"></script>
 <script async defer src="//platform.instagram.com/en_US/embeds.js"></script>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -62,13 +63,13 @@
             <span class="header-right-column">
                 <h1>Lil Uzi Vert</h1>
                 <p id="wiki">
-                Symere Woods (born July 31, 1994), better known by his stage name Lil Uzi Vert, is an American hip hop recording artist. Based in Philadelphia, he gained recognition after releasing his debut single, "Money Longer", and several mixtapes, including Luv Is Rage, Lil Uzi Vert vs. the World, and The Perfect Luv Tape. Lil Uzi Vert has also collaborated with Migos on "Bad and Boujee", which became Lil Uzi Vert's first US Billboard Hot 100 number-one single. In August 2017, Lil Uzi Vert released his debut studio album, Luv Is Rage 2, where it reached number one on the Billboard 200 Albums Chart.
-                &nbsp;<a href="https://en.wikipedia.org/wiki/Lil_Uzi_Vert" target="_blank">Bio from Wikipedia<i class="fa fa-external-link" aria-hidden="true"></i></a>
+                ${person.getWikiExcerpt()}
+                &nbsp;<a href="https://en.wikipedia.org/wiki/${person.getWikiHandle()}" target="_blank">Bio from Wikipedia<i class="fa fa-external-link" aria-hidden="true"></i></a>
                 </p>
                 <ul id="social-links">
-                    <li><img src="../../../public/images/social-media-icons/instagram.png" /> <a class="insta-link" href="https://www.instagram.com/liluzivert" target="_blank">Instagram</a> <span class="insta-followers" title="${person.getName()} has ${person.getInstaFollowers()} followers on Instagram">${person.getInstaFollowers()}</span></li>
-                    <li><img src="../../../public/images/social-media-icons/twitter.png" /> <a class="twitter-link" href="https://twitter.com/LILUZIVERT" target="_blank">Twitter</a> <span class="twitter-followers" title="${person.getName()} has ${person.getTwitterFollowers()} followers on Twitter">${person.getTwitterFollowers()}</span> </li>
-                    <li><img class="youtube-logo" src="../../../public/images/social-media-icons/youtube.png" /> <a class="youtube-link" href="https://www.youtube.com/user/LILUZIVERT" target="_blank">YouTube</a> <span class="youtube-followers" title="${person.getName()} has ${person.getYoutubeFollowers()} followers on YouTube">${person.getYoutubeFollowers()}</span></li>
+                    <li><img src="../../../public/images/social-media-icons/instagram.png" /> <a class="insta-link" href="https://www.instagram.com/${person.getInstaHandle()}" target="_blank">Instagram</a> <span class="insta-followers" title="${person.getName()} has ${person.getInstaFollowers()} followers on Instagram">${person.getInstaFollowers()}</span></li>
+                    <li><img src="../../../public/images/social-media-icons/twitter.png" /> <a class="twitter-link" href="https://twitter.com/${person.getTwitterHandle()}" target="_blank">Twitter</a> <span class="twitter-followers" title="${person.getName()} has ${person.getTwitterFollowers()} followers on Twitter">${person.getTwitterFollowers()}</span></li>
+                    <li><img class="youtube-logo" src="../../../public/images/social-media-icons/youtube.png" /> <a class="youtube-link" href="https://www.youtube.com/user/${person.getYoutubeHandle()}" target="_blank">YouTube</a> <span class="youtube-followers" title="${person.getName()} has ${person.getYoutubeFollowers()} subscribers on YouTube">${person.getYoutubeFollowers()}</span></li>
                 </ul>
             </span>
         </div>
@@ -76,9 +77,9 @@
 
     #{list posts, as: 'post'}
         <div class="row">
-            #{if post.getType() == models.MEDIA_TYPE.TWITTER}
-                <div class="col-lg-12 content-row twitter#{if post.getTweet().getAttachmentRatio() == models.Tweet.ATTACHMENT_RATIO.TALL} twit-tall#{/if}#{elseif post.getTweet().getAttachmentRatio() == models.Tweet.ATTACHMENT_RATIO.WIDE} twit-wide#{/elseif}">
-                    <div class="tweet-center#{if post.getTweet().getAttachmentRatio() == models.Tweet.ATTACHMENT_RATIO.TALL}-tall#{/if}">
+            #{if post.getType() == models.Post.MEDIA_TYPE.TWITTER}
+                <div class="col-lg-12 content-row twitter">
+                    <div class="tweet-center">
                         <blockquote class="twitter-tweet" data-lang="en">
                             <p lang="en" dir="ltr">${post.getTweet().getStatus().getText()}</p>&mdash;
                             ${post.getTweet().getStatus().getUser().getName()} (@${post.getTweet().getStatus().getUser().getScreenName()})
@@ -88,13 +89,13 @@
                 </div>
             #{/if}
 
-            #{elseif post.getType() == models.MEDIA_TYPE.YOUTUBE}
+            #{elseif post.getType() == models.Post.MEDIA_TYPE.YOUTUBE}
                 <div class="col-lg-12 content-row youtube">
                     <iframe width="551" height="310" src="https://www.youtube.com/embed/${post.getVideo().getVideoId()}?rel=0" frameborder="0" allowfullscreen></iframe>
                 </div>
             #{/elseif}
 
-            #{elseif post.getType() == models.MEDIA_TYPE.INSTAGRAM}
+            #{elseif post.getType() == models.Post.MEDIA_TYPE.INSTAGRAM}
                 <div class="col-lg-12 content-row instagram">
                     <span class="insta-positioning">
                         #{verbatim}
@@ -109,6 +110,9 @@
     <br /> <br /> <br />
     <p>A <code>p</code> here.</p>
     <br /> <br /> <br />
+
+    <script src="../../../public/javascripts/contentsize.js"></script>
+
 </div>
 
 </body>

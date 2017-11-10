@@ -53,4 +53,13 @@ public class Post implements Comparable<Post> {
         else if(this.date.isAfter(post.date)) return -1;
         else return 0;
     }
+
+    /**
+     * Enum containing available social media sources from which posts are drawn.
+     */
+    public enum MEDIA_TYPE {
+        TWITTER,
+        YOUTUBE,
+        INSTAGRAM
+    }
 }

@@ -11,6 +11,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import static controllers.util.URLUtil.getURLBody;
+
 /**
  * An instagram post.
  */
@@ -36,34 +38,14 @@ public class InstaPost {
     public static List<InstaPost> getInstaPosts(String username) {
         List<InstaPost> instaPosts = new ArrayList<>();
 
-        String instaBody = "";
-        URL instaURL = null;
-
-        try {
-            instaURL = new URL("https://www.instagram.com/" + username + "/media/");
-            URLConnection urlConnection = instaURL.openConnection();
-            String encoding = urlConnection.getContentEncoding();
-            encoding = encoding == null ? "UTF-8" : encoding;
-            instaBody = IOUtils.toString(instaURL, encoding);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        String instaBody = getURLBody("https://www.instagram.com/" + username + "/media");
 
         JSONObject instaObj = new JSONObject(instaBody);
         JSONArray instaArr = instaObj.getJSONArray("items");
 
         for(int i = 0; i < instaArr.length(); i++) {
             String postID = instaArr.getJSONObject(i).getString("code");
-
-            try {
-                instaURL = new URL("https://api.instagram.com/oembed/?url=http://instagr.am/p/" + postID + "/");
-                URLConnection urlConnection = instaURL.openConnection();
-                String encoding = urlConnection.getContentEncoding();
-                encoding = encoding == null ? "UTF-8" : encoding;
-                instaBody = IOUtils.toString(instaURL, encoding);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            instaBody = getURLBody("https://api.instagram.com/oembed/?url=http://instagr.am/p/" + postID + "/");
 
             instaObj = new JSONObject(instaBody);
             String embedHTML = instaObj.getString("html");
