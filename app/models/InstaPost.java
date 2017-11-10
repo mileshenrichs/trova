@@ -38,10 +38,10 @@ public class InstaPost {
     public static List<InstaPost> getInstaPosts(String username) {
         List<InstaPost> instaPosts = new ArrayList<>();
 
-        String instaBody = getURLBody("https://www.instagram.com/" + username + "/media");
+        String instaBody = getURLBody("https://www.instagram.com/" + username + "/?__a=1");
 
         JSONObject instaObj = new JSONObject(instaBody);
-        JSONArray instaArr = instaObj.getJSONArray("items");
+        JSONArray instaArr = instaObj.getJSONObject("user").getJSONObject("media").getJSONArray("nodes");
 
         for(int i = 0; i < instaArr.length(); i++) {
             String postID = instaArr.getJSONObject(i).getString("code");

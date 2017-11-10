@@ -191,26 +191,10 @@ h1, a, ul li a {
     height: 200px;
 }
 
-.twit-textdense {
-    height: 250px;
-}
-
-.twit-tall {
-    height: 585px;
-}
-
-.twit-shorttall {
-    height: 500px;
-}
-
-.twit-wide {
-    height: 460px;
-}
-
 /* =================== YOUTUBE STYLES =================== */
 
 .youtube iframe {
-    margin: 26px 0 0 31.4%;
+    margin: 20px 0 0 29.8%;
 }
 
 .youtube {
@@ -219,7 +203,7 @@ h1, a, ul li a {
     background: -o-radial-gradient(circle, #C20000, #7F0000);
     background: -moz-radial-gradient(circle, #C20000, #7F0000);
     background: radial-gradient(circle, #C20000, #7F0000);
-    height: 375px;
+    height: 355px;
 }
 
 /* =================== INSTAGRAM STYLES =================== */
@@ -235,5 +219,5 @@ h1, a, ul li a {
 
 .insta-positioning {
     display: block;
-    margin: 15px 0 0 37%;
+    margin: 15px 0 0 37.5%;
 }

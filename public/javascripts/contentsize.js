@@ -3,20 +3,20 @@
  * Calculates and sets height of each Tweet container on feed page
  */
 
-var iframes;
+var tweetFrames;
 var containers;
 var mediaIndices = [];
 
 window.onload = function() {
-    iframes = document.getElementsByTagName('iframe');
+    tweetFrames = document.getElementsByClassName('twitter-tweet twitter-tweet-rendered');
     containers = document.getElementsByClassName('twitter');
-    setTweetContainerHeights(containers, iframes);
+    setTweetContainerHeights(containers, tweetFrames);
 };
 
-function setTweetContainerHeights(containers, iframes) {
+function setTweetContainerHeights(containers, tweetFrames) {
     setTimeout(function() { // give iframes time to render
         for(var i = 0; i < containers.length; i++) {
-            var iframeDoc = (iframes[i].contentDocument) ? iframes[i].contentDocument : iframes[i].contentWindow.document;
+            var iframeDoc = (tweetFrames[i].contentDocument) ? tweetFrames[i].contentDocument : tweetFrames[i].contentWindow.document;
             var media = iframeDoc.getElementsByTagName('article');
             if(media.length > 0) { // tweet contains media attachment
                 var width = media[0].offsetWidth;
@@ -28,12 +28,12 @@ function setTweetContainerHeights(containers, iframes) {
                     debugger;
                 }
             }
-            containers[i].style.height = (iframes[i].offsetHeight + 40).toString() + "px";
+            containers[i].style.height = (tweetFrames[i].offsetHeight + 40).toString() + "px";
         }
     }, 100);
     setTimeout(function () {
         mediaIndices.forEach(function (index) {
-            containers[index].style.height = (iframes[index].offsetHeight + 40).toString() + "px";
+            containers[index].style.height = (tweetFrames[index].offsetHeight + 40).toString() + "px";
         })
     }, 300);
 }
