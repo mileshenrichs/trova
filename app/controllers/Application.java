@@ -1,9 +1,7 @@
 package controllers;
 
 import play.mvc.*;
-
 import java.util.*;
-
 import models.*;
 
 import static controllers.util.PersonInfoUtil.findHandles;
@@ -28,7 +26,6 @@ public class Application extends Controller {
             posts.add(new Post(post));
         }
 
-
         List<Tweet> tweets = getTweets(person.getTwitterHandle());
         for(Tweet tweet : tweets) {
             posts.add(new Post(tweet));
@@ -42,5 +39,4 @@ public class Application extends Controller {
         Collections.sort(posts);
         render(person, posts);
     }
-
 }

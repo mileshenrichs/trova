@@ -4,37 +4,56 @@
  */
 
 var tweetFrames;
-var containers;
+var tweetContainers;
 var mediaIndices = [];
+
+var instaFrames;
+var instaContainers;
+
 
 window.onload = function() {
     tweetFrames = document.getElementsByClassName('twitter-tweet twitter-tweet-rendered');
-    containers = document.getElementsByClassName('twitter');
-    setTweetContainerHeights(containers, tweetFrames);
+    tweetContainers = document.getElementsByClassName('twitter');
+    setTweetContainerHeights();
+
+
+    instaContainers = document.getElementsByClassName('instagram');
+    instaFrames = document.getElementsByClassName('instagram-media instagram-media-rendered');
+    var findFrames = setInterval(function () {
+        instaFrames = document.getElementsByClassName('instagram-media instagram-media-rendered');
+        if(instaFrames.length === instaContainers.length) {
+            clearInterval(findFrames);
+            setInstaContainerHeights();
+        }
+    }, 1000);
 };
 
-function setTweetContainerHeights(containers, tweetFrames) {
+function setTweetContainerHeights() {
     setTimeout(function() { // give iframes time to render
-        for(var i = 0; i < containers.length; i++) {
+        for(var i = 0; i < tweetContainers.length; i++) {
             var iframeDoc = (tweetFrames[i].contentDocument) ? tweetFrames[i].contentDocument : tweetFrames[i].contentWindow.document;
             var media = iframeDoc.getElementsByTagName('article');
             if(media.length > 0) { // tweet contains media attachment
                 var width = media[0].offsetWidth;
                 var height = media[0].offsetHeight;
-                debugger;
                 if(height > width) {
-                    containers[i].getElementsByClassName('tweet-center')[0].className += '-tall'; // shrink tweet
+                    tweetContainers[i].getElementsByClassName('tweet-center')[0].className += '-tall'; // shrink tweet
                     mediaIndices.push(i);
-                    debugger;
                 }
             }
-            containers[i].style.height = (tweetFrames[i].offsetHeight + 40).toString() + "px";
+            tweetContainers[i].style.height = (tweetFrames[i].offsetHeight + 40).toString() + 'px';
         }
     }, 100);
     setTimeout(function () {
         mediaIndices.forEach(function (index) {
-            containers[index].style.height = (tweetFrames[index].offsetHeight + 40).toString() + "px";
+            tweetContainers[index].style.height = (tweetFrames[index].offsetHeight + 40).toString() + 'px';
         })
     }, 300);
+}
+
+function setInstaContainerHeights() {
+    for(var i = 0; i < instaContainers.length; i++) {
+        instaContainers[i].style.height = (instaFrames[i].offsetHeight + 40).toString() + 'px';
+    }
 }
 
