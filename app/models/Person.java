@@ -6,6 +6,14 @@ import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import twitter4j.Twitter;
 import twitter4j.User;
+
+import javax.net.ssl.HttpsURLConnection;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -123,6 +131,63 @@ public class Person {
         if (m.find()) excerpt = m.group(1).substring(1); // substring removes '\n' from start
         excerpt = Jsoup.parse(excerpt).text().replaceAll("\\[(\\d+)]", ""); // remove HTML tags using Jsoup
         this.wikiExcerpt = trimExcerpt(excerpt);
+    }
+
+    /**
+     * Sets Person profile pic URL by performing Bing image search
+     */
+    public void findProfilePic() {
+        final String SUBSCRIPTION_KEY = "7c05d6c68ffb4213bde88bb1b8aca677";
+
+        String urlStr = null;
+        try {
+            urlStr = "https://api.cognitive.microsoft.com/bing/v7.0/images/search?q="
+                    + URLEncoder.encode(this.name, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        URL url = null;
+        try {
+            url = new URL(urlStr);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        HttpsURLConnection connection = null;
+        try {
+            connection = (HttpsURLConnection) url.openConnection();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        connection.setRequestProperty("Ocp-Apim-Subscription-Key", SUBSCRIPTION_KEY);
+
+        // receive JSON body
+        InputStream stream = null;
+        try {
+            stream = connection.getInputStream();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String response = new Scanner(stream).useDelimiter("\\A").next();
+        response = response.substring(0, response.indexOf("queryExpansions") - 3) + "}";
+
+        List<String> possibleImgUrls = new ArrayList<>();
+
+        JSONObject resultsObj = new JSONObject(response);
+        JSONArray imageResults = resultsObj.getJSONArray("value");
+        for(int i = 0; i < imageResults.length(); i++) {
+            int width = imageResults.getJSONObject(i).getInt("width");
+            int height = imageResults.getJSONObject(i).getInt("height");
+            double difference = Math.abs(width - height);
+            double avg = (width + height) / 2;
+            double percentDifference = difference / avg;
+            // consider image if is square within 10% margin and is large enough
+            if(percentDifference <= .1 && Math.min(width, height) > 230) {
+                possibleImgUrls.add(imageResults.getJSONObject(i).getString("contentUrl"));
+            }
+            if(possibleImgUrls.size() == 4) break;
+        }
+        // select random profile image option from possible choices
+        this.profileImgUrl = possibleImgUrls.get((int) Math.floor(Math.random() * possibleImgUrls.size()));
     }
 
     /**

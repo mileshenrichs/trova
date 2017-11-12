@@ -1,22 +1,20 @@
-import edu.stanford.nlp.ling.CoreLabel;
-import edu.stanford.nlp.ling.HasWord;
-import edu.stanford.nlp.parser.lexparser.LexicalizedParser;
-import edu.stanford.nlp.parser.lexparser.LexicalizedParserQuery;
-import edu.stanford.nlp.process.DocumentPreprocessor;
-import edu.stanford.nlp.trees.GrammaticalStructure;
-import edu.stanford.nlp.trees.GrammaticalStructureFactory;
-import edu.stanford.nlp.trees.Tree;
-import edu.stanford.nlp.trees.TreebankLanguagePack;
 import models.Person;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
 import play.test.UnitTest;
 
-import java.io.StringReader;
+import javax.net.ssl.HttpsURLConnection;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * Created by Henrichs on 10/27/2017.
@@ -53,5 +51,59 @@ public class PersonTest extends UnitTest {
         System.out.println("After: " + person2.getWikiExcerpt());
         excerpt = person2.getWikiExcerpt();
     }
+
+//    @Test
+//    public void findProfilePicTest() {
+//        HashMap<String, String> handles = new HashMap<>();
+//        handles.put("wiki", "Lil_Uzi_Vert");
+//        handles.put("insta", "liluzivert");
+//        handles.put("twitter", "liluzivert");
+//        handles.put("youtube", "LILUZIVERT");
+//        person = new Person(1, "Lil Uzi Vert", "imgUrl", "excerpt", handles);
+//
+//        final String SUBSCRIPTION_KEY = "7c05d6c68ffb4213bde88bb1b8aca677";
+//
+//        String urlStr = "https://api.cognitive.microsoft.com/bing/v7.0/images/search?q=" + URLEncoder.encode(person.name, "UTF-8");
+//        URL url = null;
+//        try {
+//            url = new URL(urlStr);
+//        } catch (MalformedURLException e) {
+//            e.printStackTrace();
+//        }
+//        HttpsURLConnection connection = null;
+//        try {
+//            connection = (HttpsURLConnection) url.openConnection();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        connection.setRequestProperty("Ocp-Apim-Subscription-Key", SUBSCRIPTION_KEY);
+//
+//        // receive JSON body
+//        InputStream stream = null;
+//        try {
+//            stream = connection.getInputStream();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        String response = new Scanner(stream).useDelimiter("\\A").next();
+//        response = response.substring(0, response.indexOf("queryExpansions") - 3) + "}";
+//
+//        List<String> possibleImgUrls = new ArrayList<>();
+//
+//        JSONObject resultsObj = new JSONObject(response);
+//        JSONArray imageResults = resultsObj.getJSONArray("value");
+//        for(int i = 0; i < imageResults.length(); i++) {
+//            int width = imageResults.getJSONObject(i).getInt("width");
+//            int height = imageResults.getJSONObject(i).getInt("height");
+//            double difference = Math.abs(width - height);
+//            double avg = (width + height) / 2;
+//            double percentDifference = difference / avg;
+//            if(percentDifference <= .1) {
+//                possibleImgUrls.add(imageResults.getJSONObject(i).getString("contentUrl"));
+//            }
+//            if(possibleImgUrls.size() == 4) break;
+//        }
+//        person.profileImgUrl = possibleImgUrls.get((int) Math.floor(Math.random() * possibleImgUrls.size()));
+//    }
 
 }

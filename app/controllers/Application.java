@@ -19,6 +19,7 @@ public class Application extends Controller {
     public static void feed() {
         Person person = new Person(1, "Lil Uzi Vert", "imgUrl", "excerpt", findHandles("Lil Uzi Vert"));
         person.retreiveWikiInfo();
+        person.findProfilePic();
         List<Post> posts = new ArrayList<>();
 
         List<InstaPost> instaPosts = getInstaPosts(person.getInstaHandle());

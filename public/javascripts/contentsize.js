@@ -1,6 +1,6 @@
 /**
  * Created by Henrichs on 10/26/2017.
- * Calculates and sets height of each Tweet container on feed page
+ * Calculates and sets heights of each Tweet and Insta post containers on page
  */
 
 var tweetFrames;

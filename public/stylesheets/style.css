@@ -59,7 +59,7 @@ h1, a, ul li a {
     display: inline-block;
 }
 
-.person-details span.header-right-column {
+.person-details div.header-right-column {
     width: 880px;
     float: right;
 }

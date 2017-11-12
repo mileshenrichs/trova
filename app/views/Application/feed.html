@@ -59,9 +59,9 @@
 
     <div class="row">
         <div class="col-lg-12 person-details">
-            <img id="profile-pic" src="https://sslb.ulximg.com/image/405x405/artist/1464961822_6e757496657e78e0a893e0c8a3753afd.jpg/8b9b3e01b6e633fbd3974385e88c2f50/1464961822_bfdbd37bf6376d367e672d59e2b22b11.jpg" alt="Lil Uzi Vert" />
-            <span class="header-right-column">
-                <h1>Lil Uzi Vert</h1>
+            <img id="profile-pic" src="${person.getProfileImgUrl()}" alt="${person.getName()}" />
+            <div class="header-right-column">
+                <h1>${person.getName()}</h1>
                 <p id="wiki">
                 ${person.getWikiExcerpt()}
                 &nbsp;<a href="https://en.wikipedia.org/wiki/${person.getWikiHandle()}" target="_blank">Bio from Wikipedia<i class="fa fa-external-link" aria-hidden="true"></i></a>
@@ -71,7 +71,7 @@
                     <li><img src="../../../public/images/social-media-icons/twitter.png" /> <a class="twitter-link" href="https://twitter.com/${person.getTwitterHandle()}" target="_blank">Twitter</a> <span class="twitter-followers" title="${person.getName()} has ${person.getTwitterFollowers()} followers on Twitter">${person.getTwitterFollowers()}</span></li>
                     <li><img class="youtube-logo" src="../../../public/images/social-media-icons/youtube.png" /> <a class="youtube-link" href="https://www.youtube.com/user/${person.getYoutubeHandle()}" target="_blank">YouTube</a> <span class="youtube-followers" title="${person.getName()} has ${person.getYoutubeFollowers()} subscribers on YouTube">${person.getYoutubeFollowers()}</span></li>
                 </ul>
-            </span>
+            </div>
         </div>
     </div>
 
