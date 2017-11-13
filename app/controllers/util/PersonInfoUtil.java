@@ -51,17 +51,30 @@ public class PersonInfoUtil {
         // loop through first 10 search results to extract social media handles for given Person name
         for(int i = 0; i < 10; i++) {
             String link = items.getJSONObject(i).getString("link");
-            if(link.contains("https://en.wikipedia.org/wiki/") && !handles.keySet().contains("wiki")) { // wiki article
-                handles.put("wiki", link.substring(30));
-            } else if(link.contains("https://www.instagram.com/") && !handles.keySet().contains("insta")) { // Instagram page
+
+            Pattern p = Pattern.compile("https://[a-z]{2}\\.wikipedia\\.org/wiki/");
+            Matcher m = p.matcher(link);
+            if(m.find() && !handles.keySet().contains("wiki")) { // wiki article
+                String wikiContent = getURLBody(link);
+                String title = wikiContent.substring(wikiContent.indexOf("<h1 id=\"firstHeading\"") + 53, wikiContent.indexOf("</h1>"));
+                if(!title.contains("<i>")) { // <i> indicates album name or similar content, exclude this result
+                    handles.put("wiki", link.substring(30));
+                }
+            }
+
+            else if(link.contains("https://www.instagram.com/") && !handles.keySet().contains("insta")) { // Instagram page
                 String insta = link.substring(26);
-                if(insta.contains("?hl=")) insta = insta.substring(0, insta.indexOf("?hl="));
+                if(insta.contains("?hl=")) insta = insta.substring(0, insta.indexOf("?hl=") - 1);
                 handles.put("insta", insta);
-            } else if(link.contains("https://twitter.com/") && !handles.keySet().contains("twitter")) { // twitter page
+            }
+
+            else if(link.contains("https://twitter.com/") && !handles.keySet().contains("twitter")) { // twitter page
                 String twitter = link.substring(20);
                 if(twitter.contains("?lang=")) twitter = twitter.substring(0, twitter.indexOf("?lang="));
                 handles.put("twitter", twitter);
-            } else if (link.contains("https://www.youtube.com/") && !handles.keySet().contains("youtube")) { // YouTube channel
+            }
+
+            else if (link.contains("https://www.youtube.com/") && !handles.keySet().contains("youtube")) { // YouTube channel
                 if (link.substring(24, 29).equals("user/")) {
                     handles.put("youtube", link.substring(29));
                     handles.put("youtubeIdType", "USERNAME");
@@ -92,9 +105,15 @@ public class PersonInfoUtil {
                     String link = items.getJSONObject(i).getString("link");
                     switch(missingHandle) {
                         case "wiki":
-                            if(link.contains("https://en.wikipedia.org/wiki/")) { // wiki article
-                                handles.put("wiki", link.substring(30));
-                                foundHandle = true;
+                            Pattern wikiPattern = Pattern.compile("https://[a-z]{2}\\.wikipedia\\.org/wiki/");
+                            Matcher wikiMatcher = wikiPattern.matcher(link);
+                            if(wikiMatcher.find()) { // wiki article
+                                String wikiContent = getURLBody(link);
+                                String title = wikiContent.substring(wikiContent.indexOf("<h1 id=\"firstHeading\"") + 53, wikiContent.indexOf("</h1>"));
+                                if(!title.contains("<i>")) { // <i> indicates album name or similar content, exclude this result
+                                    handles.put("wiki", link.substring(30));
+                                    foundHandle = true;
+                                }
                             }
                             break;
                         case "insta":

@@ -187,7 +187,9 @@ public class Person {
             e.printStackTrace();
         }
         String response = new Scanner(stream).useDelimiter("\\A").next();
-        response = response.substring(0, response.indexOf("queryExpansions") - 3) + "}";
+        if(response.contains("queryExpansions")) {
+            response = response.substring(0, response.indexOf("queryExpansions") - 3) + "}";
+        }
 
         List<String> possibleImgUrls = new ArrayList<>();
 

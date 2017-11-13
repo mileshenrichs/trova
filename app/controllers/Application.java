@@ -16,7 +16,7 @@ public class Application extends Controller {
     }
 
     public static void feed() {
-        String name = "lil uzi";
+        String name = "lil uzi vert";
         Person person = new Person(1, name, "imgUrl", "excerpt", findHandles(name));
         person.retreiveWikiInfo();
         person.findProfilePic();
