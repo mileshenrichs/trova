@@ -35,6 +35,7 @@ public class Person {
     private String instaHandle;
     private String twitterHandle;
     private String youtubeHandle;
+    private YOUTUBE_ID_TYPE youtubeIdType;
 
     public Person(long id, String name, String imgUrl, String excerpt, HashMap<String, String> handles) {
         this.id = id;
@@ -45,6 +46,15 @@ public class Person {
         this.instaHandle = handles.get("insta");
         this.twitterHandle = handles.get("twitter");
         this.youtubeHandle = handles.get("youtube");
+        this.youtubeIdType = YOUTUBE_ID_TYPE.valueOf(handles.get("youtubeIdType"));
+    }
+
+    /**
+     * Type of YouTube identifier associated with Person's channel
+     */
+    public enum YOUTUBE_ID_TYPE {
+        ID,
+        USERNAME
     }
 
     public long getId() {
@@ -79,6 +89,10 @@ public class Person {
         return youtubeHandle;
     }
 
+    public YOUTUBE_ID_TYPE getYoutubeIdType() {
+        return youtubeIdType;
+    }
+
     public String getInstaFollowers() {
         String instaBody = getURLBody("https://www.instagram.com/" + instaHandle + "/?__a=1");
         JSONObject instaObj = new JSONObject(instaBody);
@@ -100,7 +114,12 @@ public class Person {
 
     public String getYoutubeFollowers() {
         final String YOUTUBE_KEY = "AIzaSyCMHwtenY0WUR2V5fZGonSYye9g6SoJ0wo";
-        String youtubeBody = getURLBody("https://www.googleapis.com/youtube/v3/channels?part=contentDetails&forUsername=" + youtubeHandle + "&key=" + YOUTUBE_KEY);
+        String youtubeBody = "";
+        if(this.youtubeIdType == YOUTUBE_ID_TYPE.USERNAME) {
+            youtubeBody = getURLBody("https://www.googleapis.com/youtube/v3/channels?part=contentDetails&forUsername=" + youtubeHandle + "&key=" + YOUTUBE_KEY);
+        } else {
+            youtubeBody = getURLBody("https://www.googleapis.com/youtube/v3/channels?part=contentDetails&id=" + youtubeHandle + "&key=" + YOUTUBE_KEY);
+        }
         JSONObject obj = new JSONObject(youtubeBody);
         JSONArray arr = obj.getJSONArray("items");
         String userID = arr.getJSONObject(0).getString("id");

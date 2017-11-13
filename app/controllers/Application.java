@@ -15,9 +15,9 @@ public class Application extends Controller {
         render();
     }
 
-    // TODO: test if can get Tweet replied to link to display as card by substituting the t.co link for the original status link
     public static void feed() {
-        Person person = new Person(1, "Lil Uzi Vert", "imgUrl", "excerpt", findHandles("Lil Uzi Vert"));
+        String name = "lil uzi";
+        Person person = new Person(1, name, "imgUrl", "excerpt", findHandles(name));
         person.retreiveWikiInfo();
         person.findProfilePic();
         List<Post> posts = new ArrayList<>();
@@ -32,7 +32,7 @@ public class Application extends Controller {
             posts.add(new Post(tweet));
         }
 
-        List<YoutubeVideo> videos = getVideos(person.getYoutubeHandle());
+        List<YoutubeVideo> videos = getVideos(person.getYoutubeHandle(), person.getYoutubeIdType());
         for(YoutubeVideo video : videos) {
             posts.add(new Post(video));
         }

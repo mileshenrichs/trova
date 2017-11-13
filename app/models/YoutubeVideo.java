@@ -3,11 +3,12 @@ package models;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+
+import models.Person.*;
 
 import static controllers.util.URLUtil.getURLBody;
 
@@ -32,12 +33,17 @@ public class YoutubeVideo {
         return this.videoDate;
     }
 
-    public static List<YoutubeVideo> getVideos(String username) {
+    public static List<YoutubeVideo> getVideos(String username, YOUTUBE_ID_TYPE idType) {
         List<YoutubeVideo> videos = new ArrayList<>();
 
         final String YOUTUBE_KEY = "AIzaSyCMHwtenY0WUR2V5fZGonSYye9g6SoJ0wo";
 
-        String body = getURLBody("https://www.googleapis.com/youtube/v3/channels?part=contentDetails&forUsername=" + username + "&key=" + YOUTUBE_KEY);
+        String body;
+        if(idType == YOUTUBE_ID_TYPE.USERNAME) {
+            body = getURLBody("https://www.googleapis.com/youtube/v3/channels?part=contentDetails&forUsername=" + username + "&key=" + YOUTUBE_KEY);
+        } else {
+            body = getURLBody("https://www.googleapis.com/youtube/v3/channels?part=contentDetails&id=" + username + "&key=" + YOUTUBE_KEY);
+        }
 
         JSONObject obj = new JSONObject(body);
         JSONArray arr = obj.getJSONArray("items");
