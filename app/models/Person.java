@@ -8,13 +8,17 @@ import twitter4j.Twitter;
 import twitter4j.User;
 
 import javax.net.ssl.HttpsURLConnection;
+import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.*;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -203,7 +207,19 @@ public class Person {
             double percentDifference = difference / avg;
             // consider image if is square within 10% margin and is large enough
             if(percentDifference <= .1 && Math.min(width, height) > 230) {
-                possibleImgUrls.add(imageResults.getJSONObject(i).getString("contentUrl"));
+                String imgUrl = imageResults.getJSONObject(i).getString("contentUrl");
+
+                try {
+                    HttpURLConnection.setFollowRedirects(false);
+                    HttpURLConnection con = (HttpURLConnection) new URL(imgUrl).openConnection();
+                    con.setRequestMethod("HEAD");
+                    // ensure image still exists
+                    if(con.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                        possibleImgUrls.add(imgUrl);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();;
+                }
             }
             if(possibleImgUrls.size() == 4) break;
         }

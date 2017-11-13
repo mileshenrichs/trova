@@ -55,7 +55,7 @@ public class YoutubeVideo {
         int totalResults = obj.getJSONObject("pageInfo").getInt("totalResults");
         arr = obj.getJSONArray("items");
 
-        for(int i = 0; i < Math.min(20, totalResults); i++) {
+        for(int i = 0; i < Math.min(10, totalResults); i++) {
             String videoID = arr.getJSONObject(i).getJSONObject("contentDetails").getString("videoId");
             String videoDate = arr.getJSONObject(i).getJSONObject("contentDetails").getString("videoPublishedAt");
             videos.add(new YoutubeVideo(videoID, videoDate));
