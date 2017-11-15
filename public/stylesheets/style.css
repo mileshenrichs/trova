@@ -1,9 +1,104 @@
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:700');
 @import url('https://fonts.googleapis.com/css?family=Lato');
+@import url('https://fonts.googleapis.com/css?family=Cabin:400,700');
 
 h1, a, ul li a {
     transition: all 0.3s linear;
 }
+
+/* ##################### HOMEPAGE ##################### */
+
+body#home {
+    background: url(../../public/images/home/sky-buildings-dark.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+#home #logo {
+    width: 160px;
+    height: 115px;
+    position: absolute;
+    left: 50%;
+    top: 75px;
+    transform: translateX(-50%);
+    opacity: 0;
+    -webkit-transition: opacity 1.5s ease-in;
+    -moz-transition: opacity 1.5s ease-in;
+    -o-transition: opacity 1.5s ease-in;
+    transition: opacity 1.5s ease-in;
+}
+
+#home #logo.show {
+    opacity: 1;
+}
+
+#under-logo {
+    margin-top: 250px;
+}
+
+#home form {
+    margin-left: 33%;
+}
+
+#home input {
+    width: 425px;
+    height: 40px;
+    box-shadow: 2px 2px 3px #000;
+    font-size: 20px;
+    font-family: 'Cabin', sans-serif;
+    color: #e3e3e3;
+    border-radius: 0;
+    background: transparent;
+}
+
+#home input[type="text"]:focus {
+    border-color: rgba(150, 150, 150, 0.8);
+    box-shadow: 0 0 8px rgba(237, 225, 27, 0.2);
+}
+
+#home button {
+    height: 40px;
+    padding: 0 15px 0 15px;
+    background: #000;
+    background: -webkit-linear-gradient(#202020, #000);
+    background: -o-linear-gradient(#202020, #000);
+    background: -moz-linear-gradient(#202020, #000);
+    background: linear-gradient(#202020, #000);
+    border: 1px solid #e3e3e3;
+    border-left: 1px solid rgba(150, 150, 150, 0.5);
+    box-shadow: 2px 2px 3px #000;
+}
+
+#home button i {
+    color: #e3e3e3;
+    background: -webkit-linear-gradient(#fff, #D4D4D4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 25px;
+}
+
+#home h1 {
+    font-family: 'Cabin', sans-serif;
+    font-size: 40px;
+    font-weight: bold;
+    color: #EDEDED;
+    margin: 0 0 0 28.5%;
+}
+
+#home h2 {
+    font-family: 'Cabin', sans-serif;
+    font-size: 20px;
+    color: #CCCCCC;
+    margin: 10px 0 40px 45.5%;
+}
+
+#home h2 i {
+    font-size: 15px;
+}
+
+/* ##################### FEED ##################### */
 
 .content-row {
     width: 100%;

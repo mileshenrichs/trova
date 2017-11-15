@@ -160,21 +160,38 @@ public class Person {
      * Sets Person profile pic URL by performing Bing image search
      */
     public void findProfilePic() {
-        final String SUBSCRIPTION_KEY = "7c05d6c68ffb4213bde88bb1b8aca677";
-
-        String urlStr = null;
+        String encodedName = "";
         try {
-            urlStr = "https://api.cognitive.microsoft.com/bing/v7.0/images/search?q="
-                    + URLEncoder.encode(this.name, "UTF-8");
+            encodedName = URLEncoder.encode(this.name, "UTF-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
+        String urlStr = "https://api.cognitive.microsoft.com/bing/v7.0/images/search?q=" + encodedName;
         URL url = null;
         try {
             url = new URL(urlStr);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
+
+        List<String> possibleImgUrls = getImageUrls(url);
+
+        if(possibleImgUrls.size() == 0) {
+            urlStr = "https://api.cognitive.microsoft.com/bing/v7.0/images/search"
+                    + "?aspect=Square" + "&q=" + encodedName;
+            try {
+                url = new URL(urlStr);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+            possibleImgUrls = getImageUrls(url);
+        }
+        // select random profile image option from possible choices
+        this.profileImgUrl = possibleImgUrls.get((int) Math.floor(Math.random() * (possibleImgUrls.size() - 1) + 1));
+    }
+
+    public static List<String> getImageUrls(URL url) {
+        final String SUBSCRIPTION_KEY = "7c05d6c68ffb4213bde88bb1b8aca677";
         HttpsURLConnection connection = null;
         try {
             connection = (HttpsURLConnection) url.openConnection();
@@ -199,6 +216,7 @@ public class Person {
 
         JSONObject resultsObj = new JSONObject(response);
         JSONArray imageResults = resultsObj.getJSONArray("value");
+
         for(int i = 0; i < imageResults.length(); i++) {
             int width = imageResults.getJSONObject(i).getInt("width");
             int height = imageResults.getJSONObject(i).getInt("height");
@@ -218,13 +236,12 @@ public class Person {
                         possibleImgUrls.add(imgUrl);
                     }
                 } catch (Exception e) {
-                    e.printStackTrace();;
+                    e.printStackTrace();
                 }
             }
             if(possibleImgUrls.size() == 4) break;
         }
-        // select random profile image option from possible choices
-        this.profileImgUrl = possibleImgUrls.get((int) Math.floor(Math.random() * possibleImgUrls.size()));
+        return possibleImgUrls;
     }
 
     /**

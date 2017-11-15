@@ -1,4 +1,69 @@
-#{extends 'main.html' /}
-#{set title:'Home' /}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://use.fontawesome.com/c8d6558f7e.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../public/images/favicon.png" />
 
-#{welcome /}
+    <title>trova</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../../../public/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+
+    <!-- Custom styles -->
+    <link href="../../../public/stylesheets/style.css" rel="stylesheet">
+</head>
+
+<body id="home">
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="../../../public/javascripts/bootstrap.min.js"></script>
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-lg-12">
+            <a id="logo-link" href="#"><img id="logo" src="../../../public/images/logo.png" alt="Trova" /></a>
+        </div>
+    </div>
+
+    <div class="row" id="under-logo">
+        <div class="col-lg-12 animated fadeInUp">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Learn more through social media.</h1>
+                    <h2>search below <i class="fa fa-angle-double-down" aria-hidden="true"></i></h2>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <form class="form-inline" action="@{Application.feed(name)}" autocomplete="off">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="name" value="${name}" placeholder="I want to find...">
+                            <span class="input-group-btn">
+                                <button class="btn" type="submit">
+                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="../../../public/javascripts/home.js"></script>
+
+</div>
+
+</body>
+</html>

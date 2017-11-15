@@ -65,6 +65,9 @@ public class PersonInfoUtil {
             else if(link.contains("https://www.instagram.com/") && !handles.keySet().contains("insta")) { // Instagram page
                 String insta = link.substring(26);
                 if(insta.contains("?hl=")) insta = insta.substring(0, insta.indexOf("?hl=") - 1);
+                if(insta.contains("/")) {
+                    insta = insta.replace("/", "");
+                }
                 handles.put("insta", insta);
             }
 
@@ -118,9 +121,12 @@ public class PersonInfoUtil {
                             break;
                         case "insta":
                             if(link.contains("https://www.instagram.com/")) { // Instagram page
-                                Pattern p = Pattern.compile("https://www.instagram.com/(.*)/\\?hl=");
-                                Matcher m = p.matcher(link);
-                                if(m.find()) handles.put("insta", m.group(1));
+                                String insta = link.substring(26);
+                                if(insta.contains("?hl=")) insta = insta.substring(0, insta.indexOf("?hl=") - 1);
+                                if(insta.contains("/")) {
+                                    insta = insta.replace("/", "");
+                                }
+                                handles.put("insta", insta);
                                 foundHandle = true;
                             }
                             break;
