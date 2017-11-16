@@ -108,27 +108,42 @@ body#home {
 /* =================== NAV STYLES =================== */
 
 .top-bar {
-    width: 100%;
     height: 65px;
     background: #000;
     background: -webkit-linear-gradient(#252525, #101010);
     background: -o-linear-gradient(#252525, #101010);
     background: -moz-linear-gradient(#252525, #101010);
     background: linear-gradient(#252525, #101010);
-    padding-left: 48%;
+}
+
+.top-bar form {
+    margin: 17px 0 0 37.8%;
+}
+
+.top-bar input#search-input {
+    width: 280px;
+    border-color: #000;
+    color: #000;
+}
+
+.top-bar input[type="text"]:focus {
+    border-color: #000;
+    box-shadow: none;
+}
+
+.top-bar .logo {
+    margin: 7px 0 0 13%;
 }
 
 .top-bar img {
     width: 70px;
     height: 50px;
-    margin-top: 7px;
     display: inline-block;
 }
 
 .top-bar img:hover {
     -webkit-transition: .5s ease-in-out;
     -moz-transition: .5s ease-in-out;
-    -ms-transition: .5s ease-in-out;
     -o-transition: .5s ease-in-out;
     transition: .5s ease-in-out;
     -webkit-transform: scale(1.15);
@@ -142,9 +157,13 @@ body#home {
 
 .person-details {
     background-color: #252525;
-    padding: 20px 20px 0 175px;
+    padding: 14px 20px 0 160px;
     height: 350px;
-    border-bottom: 5px solid #101010;
+    border-bottom: 3px solid #101010;
+}
+
+.person-details .p-pic {
+    width: 280px;
 }
 
 .person-details #profile-pic {
@@ -154,16 +173,110 @@ body#home {
     display: inline-block;
 }
 
-.person-details div.header-right-column {
-    width: 880px;
-    float: right;
+.person-details #filter-box {
+    margin-top: 8px;
+    border-radius: 8px;
+    width: 240px;
+    height: 70px;
+    background: #E5E5E5;
+    background: -webkit-radial-gradient(circle, #F0F0F0, #CFCFCF);
+    background: -o-radial-gradient(circle, #F0F0F0, #CFCFCF);
+    background: -moz-radial-gradient(circle, #F0F0F0, #CFCFCF);
+    background: radial-gradient(circle, #F0F0F0, #CFCFCF);
+}
+
+.person-details #filter-box h3 {
+    margin: 0;
+    padding: 3px 0 3px 76px;
+    display: block;
+    font-family: 'Cabin', sans-serif;
+    font-size: 16px;
+    border-bottom: 1px solid #000;
+    color: #000;
+    cursor: default;
+}
+
+.person-details #filter-box img {
+    width: 30px;
+    height: 30px;
+}
+
+.person-details #filter-box span {
+    padding: 7px 0 0 7px;
+    color: #1F1F1E;
+}
+
+.person-details #filter-box span #insta-posts-amt,
+.person-details #filter-box span #tweets-amt {
+    position: relative;
+    top: 2px;
+    right: 2px;
+}
+
+.person-details #filter-box span #youtube-vids-amt {
+    position: relative;
+    top: 4px;
+    right: 2px;
+}
+
+.person-details #filter-box span b {
+    color: #000;
+}
+
+.person-details #filter-box span#insta {
+    display: block;
+    float: left;
+    border-radius: 0 0 0 6px;
+    height: 45px;
+    width: 33%;
+    background: #DB32A1;
+    background: -webkit-radial-gradient(circle, #DB32A1, #91216B);
+    background: -o-radial-gradient(circle, #DB32A1, #91216B);
+    background: -moz-radial-gradient(circle, #DB32A1, #91216B);
+    background: radial-gradient(circle, #DB32A1, #91216B);
+}
+
+.person-details #filter-box span#twitter {
+    display: block;
+    float: left;
+    height: 45px;
+    width: 33%;
+    background: #008EC4;
+    background: -webkit-radial-gradient(circle, #008EC4, #005270);
+    background: -o-radial-gradient(circle, #008EC4, #005270);
+    background: -moz-radial-gradient(circle, #008EC4, #005270);
+    background: radial-gradient(circle, #008EC4, #005270);
+}
+
+.person-details #filter-box span#twitter img {
+    width: 32px;
+    height: 32px;
+}
+
+.person-details #filter-box span#youtube {
+    display: block;
+    float: left;
+    border-radius: 0 0 6px 0;
+    height: 45px;
+    width: 34%;
+    background: #C20000;
+    background: -webkit-radial-gradient(circle, #C20000, #7F0000);
+    background: -o-radial-gradient(circle, #C20000, #7F0000);
+    background: -moz-radial-gradient(circle, #C20000, #7F0000);
+    background: radial-gradient(circle, #C20000, #7F0000);
+}
+
+.person-details #filter-box span#youtube img {
+    width: 34px;
+    height: 24px;
+    margin-top: 4px;
 }
 
 .person-details h1 {
     font-family: 'Source Sans Pro', sans-serif;
     letter-spacing: 1px;
     font-size: 43px;
-    margin-top: 10px;
+    margin-top: -6px;
     color: #D1D1D1;
     text-shadow: 1px 2px 2px rgba(0, 0, 0, 0.8);
     cursor: pointer;
