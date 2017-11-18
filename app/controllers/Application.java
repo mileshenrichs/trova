@@ -4,7 +4,7 @@ import play.mvc.*;
 import java.util.*;
 import models.*;
 
-import static controllers.util.PersonInfoUtil.findHandles;
+import static models.Person.findHandles;
 import static models.InstaPost.getInstaPosts;
 import static models.Tweet.getTweets;
 import static models.YoutubeVideo.getVideos;

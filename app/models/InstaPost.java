@@ -1,17 +1,14 @@
 package models;
 
-import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.net.URL;
-import java.net.URLConnection;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-import static controllers.util.URLUtil.getURLBody;
+import static util.URLUtil.getURLBody;
 
 /**
  * An instagram post.

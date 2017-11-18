@@ -1,4 +1,4 @@
-package controllers.util;
+package util;
 
 import org.apache.commons.io.IOUtils;
 import java.net.URL;

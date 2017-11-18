@@ -10,7 +10,7 @@ import java.util.List;
 
 import models.Person.*;
 
-import static controllers.util.URLUtil.getURLBody;
+import static util.URLUtil.getURLBody;
 
 /**
  * Represents a single YouTube Video with fields videoID and videoDate.

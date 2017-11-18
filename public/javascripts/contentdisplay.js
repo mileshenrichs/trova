@@ -57,7 +57,6 @@ var showMoreButton = document.getElementsByClassName('show-more')[0];
 showMoreButton.addEventListener('click', showMore);
 
 function toggleFilter() {
-    debugger;
     var filtersIndex = filters.indexOf(this);
     if(filtersOn[filtersIndex]) { // toggled on
         filtersOn[filtersIndex] = false;
@@ -124,7 +123,6 @@ function showMore() {
     }
 
     // catalogue source of each content row up to startIndex
-    debugger;
     tweetIndex = -1;
     instaIndex = -1;
     youtubeVidIndex = -1;
