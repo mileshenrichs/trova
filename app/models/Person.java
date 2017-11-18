@@ -120,7 +120,7 @@ public class Person {
 
             Pattern p = Pattern.compile("https://[a-z]{2}\\.wikipedia\\.org/wiki/");
             Matcher m = p.matcher(link);
-            if(m.find() && !handles.keySet().contains("wiki")) { // wiki article
+            if(m.find() && !link.substring(30).contains("Template") && !handles.keySet().contains("wiki")) { // wiki article
                 String wikiContent = getURLBody(link);
                 String title = wikiContent.substring(wikiContent.indexOf("<h1 id=\"firstHeading\"") + 53, wikiContent.indexOf("</h1>"));
                 if(!title.contains("<i>")) { // <i> indicates album name or similar content, exclude this result
@@ -164,60 +164,75 @@ public class Person {
             }
 
             for(String missingHandle : missingHandles) {
-                boolean foundHandle = false;
-                String query = encodedName + "+" + missingHandle;
-                searchJSON = getURLBody("https://www.googleapis.com/customsearch/v1?key=" + API_KEY + "&q=" + query + "&cx=" + SEARCH_ENGINE_ID + "&alt=json");
-                resultsObj = new JSONObject(searchJSON);
-                items = resultsObj.getJSONArray("items");
-                int i = 0;
-                while(i < 5 && !foundHandle) {
-                    String link = items.getJSONObject(i).getString("link");
-                    switch(missingHandle) {
-                        case "wiki":
-                            Pattern wikiPattern = Pattern.compile("https://[a-z]{2}\\.wikipedia\\.org/wiki/");
-                            Matcher wikiMatcher = wikiPattern.matcher(link);
-                            if(wikiMatcher.find()) { // wiki article
-                                String wikiContent = getURLBody(link);
-                                String title = wikiContent.substring(wikiContent.indexOf("<h1 id=\"firstHeading\"") + 53, wikiContent.indexOf("</h1>"));
-                                if(!title.contains("<i>")) { // <i> indicates album name or similar content, exclude this result
-                                    handles.put("wiki", link.substring(30));
+                if (missingHandle.equals("youtube")) {
+                    final String YOUTUBE_KEY = "AIzaSyCMHwtenY0WUR2V5fZGonSYye9g6SoJ0wo";
+                    String youtubeJSON = getURLBody("https://www.googleapis.com/youtube/v3/search"
+                            + "?part=id"
+                            + "&q=" + encodedName
+                            + "&type=channel"
+                            + "&maxResults=1"
+                            + "&key=" + YOUTUBE_KEY);
+                    JSONObject channelObj = new JSONObject(youtubeJSON);
+                    JSONArray arr = channelObj.getJSONArray("items");
+                    String youtubeHandle = arr.getJSONObject(0).getJSONObject("id").getString("channelId");
+                    handles.put("youtube", youtubeHandle);
+                    handles.put("youtubeIdType", "ID");
+                } else {
+                    boolean foundHandle = false;
+                    String query = encodedName + "+" + missingHandle;
+                    searchJSON = getURLBody("https://www.googleapis.com/customsearch/v1?key=" + API_KEY + "&q=" + query + "&cx=" + SEARCH_ENGINE_ID + "&alt=json");
+                    resultsObj = new JSONObject(searchJSON);
+                    items = resultsObj.getJSONArray("items");
+                    int i = 0;
+                    while (i < 10 && !foundHandle) {
+                        String link = items.getJSONObject(i).getString("link");
+                        switch (missingHandle) {
+                            case "wiki":
+                                Pattern wikiPattern = Pattern.compile("https://[a-z]{2}\\.wikipedia\\.org/wiki/");
+                                Matcher wikiMatcher = wikiPattern.matcher(link);
+                                if (wikiMatcher.find() && !link.substring(30).contains("Template")) { // wiki article
+                                    String wikiContent = getURLBody(link);
+                                    String title = wikiContent.substring(wikiContent.indexOf("<h1 id=\"firstHeading\"") + 53, wikiContent.indexOf("</h1>"));
+                                    if (!title.contains("<i>")) { // <i> indicates album name or similar content, exclude this result
+                                        handles.put("wiki", link.substring(30));
+                                        foundHandle = true;
+                                    }
+                                }
+                                break;
+                            case "insta":
+                                if (link.contains("https://www.instagram.com/")) { // Instagram page
+                                    String insta = link.substring(26);
+                                    if (insta.contains("?hl=")) insta = insta.substring(0, insta.indexOf("?hl=") - 1);
+                                    if (insta.contains("/")) {
+                                        insta = insta.replace("/", "");
+                                    }
+                                    handles.put("insta", insta);
                                     foundHandle = true;
                                 }
-                            }
-                            break;
-                        case "insta":
-                            if(link.contains("https://www.instagram.com/")) { // Instagram page
-                                String insta = link.substring(26);
-                                if(insta.contains("?hl=")) insta = insta.substring(0, insta.indexOf("?hl=") - 1);
-                                if(insta.contains("/")) {
-                                    insta = insta.replace("/", "");
-                                }
-                                handles.put("insta", insta);
-                                foundHandle = true;
-                            }
-                            break;
-                        case "twitter":
-                            if(link.contains("https://twitter.com/")) { // twitter page
-                                Pattern p = Pattern.compile("https://twitter.com/(.*)\\?lang=");
-                                Matcher m = p.matcher(link);
-                                if(m.find()) handles.put("twitter", m.group(1));
-                                foundHandle = true;
-                            }
-                            break;
-                        default:
-                            if (link.contains("https://www.youtube.com/")) { // YouTube channel
-                                if (link.substring(24, 29).equals("user/")) {
-                                    handles.put("youtube", link.substring(29));
-                                    handles.put("youtubeIdType", "USERNAME");
-                                    foundHandle = true;
-                                } else if (link.substring(24, 32).equals("channel/")) {
-                                    handles.put("youtube", link.substring(32));
-                                    handles.put("youtubeIdType", "ID");
+                                break;
+                            case "twitter":
+                                if (link.contains("https://twitter.com/")) { // twitter page
+                                    Pattern p = Pattern.compile("https://twitter.com/(.*)\\?lang=");
+                                    Matcher m = p.matcher(link);
+                                    if (m.find()) handles.put("twitter", m.group(1));
                                     foundHandle = true;
                                 }
-                            }
+                                break;
+                            default:
+                                if (link.contains("https://www.youtube.com/")) { // YouTube channel
+                                    if (link.substring(24, 29).equals("user/")) {
+                                        handles.put("youtube", link.substring(29));
+                                        handles.put("youtubeIdType", "USERNAME");
+                                        foundHandle = true;
+                                    } else if (link.substring(24, 32).equals("channel/")) {
+                                        handles.put("youtube", link.substring(32));
+                                        handles.put("youtubeIdType", "ID");
+                                        foundHandle = true;
+                                    }
+                                }
+                        }
+                        i++;
                     }
-                    i++;
                 }
             }
         }
@@ -287,9 +302,19 @@ public class Person {
 
         // set wiki excerpt text
         String excerpt = "";
-        Pattern p = Pattern.compile("</table>(.*?)<div id=\"toc\" class=\"toc\">", Pattern.DOTALL); // DOTALL matches line terminators
+        Pattern p = Pattern.compile("vcard(.*?)</table>(.*?)<div id=\"toc\" class=\"toc\">", Pattern.DOTALL); // DOTALL matches line terminators
         Matcher m = p.matcher(wikiBody);
-        if (m.find()) excerpt = m.group(1).substring(1); // substring removes '\n' from start
+        if (m.find()) {
+            // search again in case of multiple vcards
+            String bodyAfterVcard = wikiBody.substring(m.start() + 7);
+            Pattern secondP = Pattern.compile("vcard(.*?)</table>(.*?)</table>(.*?)<div id=\"toc\" class=\"toc\">", Pattern.DOTALL);
+            Matcher secondM = secondP.matcher(bodyAfterVcard);
+            if(secondM.find()) {
+                excerpt = secondM.group(3).substring(1);
+            } else {
+                excerpt = m.group(2).substring(1); // substring removes '\n' from start
+            }
+        }
         excerpt = Jsoup.parse(excerpt).text().replaceAll("\\[(\\d+)]", ""); // remove HTML tags using Jsoup
         this.wikiExcerpt = trimExcerpt(excerpt);
     }
