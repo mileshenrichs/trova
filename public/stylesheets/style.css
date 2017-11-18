@@ -486,3 +486,19 @@ body#home {
     display: block;
     margin: 15px 0 0 37.5%;
 }
+
+/* =================== SHOW MORE BUTTON =================== */
+
+.show-more {
+    height: 60px;
+    background: #1F1F1E;
+    color: #e3e3e3;
+    font-family: 'Cabin', sans-serif;
+    font-size: 21px;
+    padding: 14px 0 0 47%;
+    cursor: pointer;
+}
+
+.show-more:hover {
+    background: #30302F;
+}

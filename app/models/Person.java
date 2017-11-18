@@ -186,8 +186,12 @@ public class Person {
             }
             possibleImgUrls = getImageUrls(url);
         }
-        // select random profile image option from possible choices
-        this.profileImgUrl = possibleImgUrls.get((int) Math.floor(Math.random() * (possibleImgUrls.size() - 1) + 1));
+        if(possibleImgUrls.size() == 1) {
+            this.profileImgUrl = possibleImgUrls.get(0);
+        } else {
+            // select random profile image option from possible choices
+            this.profileImgUrl = possibleImgUrls.get((int) Math.floor(Math.random() * (possibleImgUrls.size() - 1) + 1));
+        }
     }
 
     public static List<String> getImageUrls(URL url) {
