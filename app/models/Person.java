@@ -47,7 +47,9 @@ public class Person {
         this.instaHandle = handles.get("insta");
         this.twitterHandle = handles.get("twitter");
         this.youtubeHandle = handles.get("youtube");
-        this.youtubeIdType = YOUTUBE_ID_TYPE.valueOf(handles.get("youtubeIdType"));
+        if(handles.containsKey("youtubeIdType")) {
+            this.youtubeIdType = YOUTUBE_ID_TYPE.valueOf(handles.get("youtubeIdType"));
+        }
     }
 
     /**
@@ -170,13 +172,20 @@ public class Person {
                             + "?part=id"
                             + "&q=" + encodedName
                             + "&type=channel"
-                            + "&maxResults=1"
+                            + "&maxResults=3"
                             + "&key=" + YOUTUBE_KEY);
                     JSONObject channelObj = new JSONObject(youtubeJSON);
                     JSONArray arr = channelObj.getJSONArray("items");
-                    String youtubeHandle = arr.getJSONObject(0).getJSONObject("id").getString("channelId");
-                    handles.put("youtube", youtubeHandle);
-                    handles.put("youtubeIdType", "ID");
+                    for(int i = 0; i < arr.length(); i++) {
+                        String channelId = arr.getJSONObject(i).getJSONObject("id").getString("channelId");
+                        String thisChannel = getURLBody("https://www.googleapis.com/youtube/v3/channels?part=statistics&id=" + channelId + "&key=" + YOUTUBE_KEY);
+                        int subscriberCount = Integer.valueOf(new JSONObject(thisChannel).getJSONArray("items")
+                                .getJSONObject(0).getJSONObject("statistics").getString("subscriberCount"));
+                        if(subscriberCount >= 50000) {
+                            handles.put("youtube", channelId);
+                            handles.put("youtubeIdType", "ID");
+                        }
+                    }
                 } else {
                     boolean foundHandle = false;
                     String query = encodedName + "+" + missingHandle;
@@ -184,7 +193,7 @@ public class Person {
                     resultsObj = new JSONObject(searchJSON);
                     items = resultsObj.getJSONArray("items");
                     int i = 0;
-                    while (i < 10 && !foundHandle) {
+                    while (i < 5 && !foundHandle) {
                         String link = items.getJSONObject(i).getString("link");
                         switch (missingHandle) {
                             case "wiki":
@@ -210,25 +219,12 @@ public class Person {
                                     foundHandle = true;
                                 }
                                 break;
-                            case "twitter":
+                            default:
                                 if (link.contains("https://twitter.com/")) { // twitter page
                                     Pattern p = Pattern.compile("https://twitter.com/(.*)\\?lang=");
                                     Matcher m = p.matcher(link);
                                     if (m.find()) handles.put("twitter", m.group(1));
                                     foundHandle = true;
-                                }
-                                break;
-                            default:
-                                if (link.contains("https://www.youtube.com/")) { // YouTube channel
-                                    if (link.substring(24, 29).equals("user/")) {
-                                        handles.put("youtube", link.substring(29));
-                                        handles.put("youtubeIdType", "USERNAME");
-                                        foundHandle = true;
-                                    } else if (link.substring(24, 32).equals("channel/")) {
-                                        handles.put("youtube", link.substring(32));
-                                        handles.put("youtubeIdType", "ID");
-                                        foundHandle = true;
-                                    }
                                 }
                         }
                         i++;
@@ -259,23 +255,25 @@ public class Person {
     }
 
     public String getYoutubeFollowers() {
-        final String YOUTUBE_KEY = "AIzaSyCMHwtenY0WUR2V5fZGonSYye9g6SoJ0wo";
-        String youtubeBody = "";
-        if(this.youtubeIdType == YOUTUBE_ID_TYPE.USERNAME) {
-            youtubeBody = getURLBody("https://www.googleapis.com/youtube/v3/channels?part=contentDetails&forUsername=" + youtubeHandle + "&key=" + YOUTUBE_KEY);
-        } else {
-            youtubeBody = getURLBody("https://www.googleapis.com/youtube/v3/channels?part=contentDetails&id=" + youtubeHandle + "&key=" + YOUTUBE_KEY);
-        }
-        JSONObject obj = new JSONObject(youtubeBody);
-        JSONArray arr = obj.getJSONArray("items");
-        String userID = arr.getJSONObject(0).getString("id");
+        if(this.youtubeHandle != null) {
+            final String YOUTUBE_KEY = "AIzaSyCMHwtenY0WUR2V5fZGonSYye9g6SoJ0wo";
+            String youtubeBody = "";
+            if (this.youtubeIdType == YOUTUBE_ID_TYPE.USERNAME) {
+                youtubeBody = getURLBody("https://www.googleapis.com/youtube/v3/channels?part=contentDetails&forUsername=" + youtubeHandle + "&key=" + YOUTUBE_KEY);
+            } else {
+                youtubeBody = getURLBody("https://www.googleapis.com/youtube/v3/channels?part=contentDetails&id=" + youtubeHandle + "&key=" + YOUTUBE_KEY);
+            }
+            JSONObject obj = new JSONObject(youtubeBody);
+            JSONArray arr = obj.getJSONArray("items");
+            String userID = arr.getJSONObject(0).getString("id");
 
-        youtubeBody = getURLBody("https://www.googleapis.com/youtube/v3/channels?part=statistics&id=" + userID + "&key=" + YOUTUBE_KEY);
-        obj = new JSONObject(youtubeBody);
-        arr = obj.getJSONArray("items");
-        int youtubeFollowers = arr.getJSONObject(0).getJSONObject("statistics").getInt("subscriberCount");
+            youtubeBody = getURLBody("https://www.googleapis.com/youtube/v3/channels?part=statistics&id=" + userID + "&key=" + YOUTUBE_KEY);
+            obj = new JSONObject(youtubeBody);
+            arr = obj.getJSONArray("items");
+            int youtubeFollowers = arr.getJSONObject(0).getJSONObject("statistics").getInt("subscriberCount");
 
-        return processFollowerCount(youtubeFollowers, 0);
+            return processFollowerCount(youtubeFollowers, 0);
+        } else return "";
     }
 
     public static String processFollowerCount(int n, int iteration) {

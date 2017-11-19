@@ -75,10 +75,12 @@
                     <img src="../../../public/images/social-media-icons/bw/twitter.png" alt="Twitter" />
                     <span id="tweets-amt">(<b>0</b>)</span>
                 </span>
-                <span id="youtube" title="Hide YouTube Posts">
-                    <img src="../../../public/images/social-media-icons/bw/youtube.png" alt="Youtube" />
-                    <span id="youtube-vids-amt">(<b>0</b>)</span>
-                </span>
+                #{if person.getYoutubeHandle() != null}
+                    <span id="youtube" title="Hide YouTube Posts">
+                        <img src="../../../public/images/social-media-icons/bw/youtube.png" alt="Youtube" />
+                        <span id="youtube-vids-amt">(<b>0</b>)</span>
+                    </span>
+                #{/if}
             </div>
         </div>
         <div class="col-lg-8 p-info">
@@ -90,7 +92,7 @@
             <ul id="social-links">
                 <li><img src="../../../public/images/social-media-icons/instagram.png" /> <a class="insta-link" href="https://www.instagram.com/${person.getInstaHandle()}" target="_blank">Instagram</a> <span class="insta-followers" title="${person.getName()} has ${person.getInstaFollowers()} followers on Instagram">${person.getInstaFollowers()}</span></li>
                 <li><img src="../../../public/images/social-media-icons/twitter.png" /> <a class="twitter-link" href="https://twitter.com/${person.getTwitterHandle()}" target="_blank">Twitter</a> <span class="twitter-followers" title="${person.getName()} has ${person.getTwitterFollowers()} followers on Twitter">${person.getTwitterFollowers()}</span></li>
-                <li><img class="youtube-logo" src="../../../public/images/social-media-icons/youtube.png" /> <a class="youtube-link" href="https://www.youtube.com/${person.getYoutubeIdType() == models.Person.YOUTUBE_ID_TYPE.USERNAME ? 'user' : 'channel'}/${person.getYoutubeHandle()}" target="_blank">YouTube</a> <span class="youtube-followers" title="${person.getName()} has ${person.getYoutubeFollowers()} subscribers on YouTube">${person.getYoutubeFollowers()}</span></li>
+                #{if person.getYoutubeHandle() != null}<li><img class="youtube-logo" src="../../../public/images/social-media-icons/youtube.png" /> <a class="youtube-link" href="https://www.youtube.com/${person.getYoutubeIdType() == models.Person.YOUTUBE_ID_TYPE.USERNAME ? 'user' : 'channel'}/${person.getYoutubeHandle()}" target="_blank">YouTube</a> <span class="youtube-followers" title="${person.getName()} has ${person.getYoutubeFollowers()} subscribers on YouTube">${person.getYoutubeFollowers()}</span></li>#{/if}
             </ul>
         </div>
     </div>

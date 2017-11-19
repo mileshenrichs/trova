@@ -31,9 +31,11 @@ public class Application extends Controller {
             posts.add(new Post(tweet));
         }
 
-        List<YoutubeVideo> videos = getVideos(person.getYoutubeHandle(), person.getYoutubeIdType());
-        for(YoutubeVideo video : videos) {
-            posts.add(new Post(video));
+        if(person.getYoutubeHandle() != null) {
+            List<YoutubeVideo> videos = getVideos(person.getYoutubeHandle(), person.getYoutubeIdType());
+            for (YoutubeVideo video : videos) {
+                posts.add(new Post(video));
+            }
         }
 
         Collections.sort(posts);

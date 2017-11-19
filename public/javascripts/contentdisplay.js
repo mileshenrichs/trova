@@ -44,6 +44,7 @@ spans.forEach(function (spn) {
 });
 
 updatePostCounts();
+checkMissingSocial();
 
 function initializeDisplay() {
     allContent.forEach(function (c) {
@@ -111,7 +112,9 @@ function toggleFilter() {
 function updatePostCounts() {
     postCounts[0].getElementsByTagName('b')[0].innerHTML = instaPosts.length;
     postCounts[1].getElementsByTagName('b')[0].innerHTML = tweets.length;
-    postCounts[2].getElementsByTagName('b')[0].innerHTML = youtubeVids.length;
+    if(postCounts.length > 2) {
+        postCounts[2].getElementsByTagName('b')[0].innerHTML = youtubeVids.length;
+    }
 }
 
 function showMore() {
@@ -161,5 +164,36 @@ function showMore() {
             }
         }
         j++;
+    }
+}
+
+function checkMissingSocial() {
+    debugger;
+    var missingSocial = [];
+    var socialLinks = document.getElementById('social-links');
+
+    // populate missingSocial with missing social media sources
+    var instaLink = document.getElementsByClassName('insta-link');
+    var twitterLink = document.getElementsByClassName('twitter-link');
+    var youtubeLink = document.getElementsByClassName('youtube-link');
+    if(instaLink.length === 0) missingSocial.push('insta');
+    if(twitterLink.length === 0) missingSocial.push('twitter');
+    if(youtubeLink.length === 0) missingSocial.push('youtube');
+
+    // push social links down to fill bottom space
+    socialLinks.style.paddingTop = (31 * missingSocial.length).toString() + "px";
+
+    var instaFilterBtn = document.getElementById('insta');
+    var twitterFilterBtn = document.getElementById('twitter');
+    var youtubeFilterBtn = document.getElementById('youtube');
+    if(missingSocial.length === 1) {
+        if(missingSocial[0] === 'youtube') {
+            instaFilterBtn.style.width = "50%";
+            instaFilterBtn.getElementsByTagName('img')[0].style.marginLeft = "18%";
+            twitterFilterBtn.getElementsByTagName('img')[0].style.marginLeft = "18%";
+            twitterFilterBtn.style.width = "50%";
+            twitterFilterBtn.style.borderRight = "none";
+            twitterFilterBtn.style.borderRadius = "0 0 6px 0";
+        }
     }
 }
