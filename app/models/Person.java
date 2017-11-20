@@ -30,6 +30,7 @@ import static util.URLUtil.getURLBody;
 public class Person {
     private long id;
     private String name;
+    private String disambiguation;
     private String profileImgUrl;
     private String wikiExcerpt;
     private String wikiHandle;
@@ -255,25 +256,23 @@ public class Person {
     }
 
     public String getYoutubeFollowers() {
-        if(this.youtubeHandle != null) {
-            final String YOUTUBE_KEY = "AIzaSyCMHwtenY0WUR2V5fZGonSYye9g6SoJ0wo";
-            String youtubeBody = "";
-            if (this.youtubeIdType == YOUTUBE_ID_TYPE.USERNAME) {
-                youtubeBody = getURLBody("https://www.googleapis.com/youtube/v3/channels?part=contentDetails&forUsername=" + youtubeHandle + "&key=" + YOUTUBE_KEY);
-            } else {
-                youtubeBody = getURLBody("https://www.googleapis.com/youtube/v3/channels?part=contentDetails&id=" + youtubeHandle + "&key=" + YOUTUBE_KEY);
-            }
-            JSONObject obj = new JSONObject(youtubeBody);
-            JSONArray arr = obj.getJSONArray("items");
-            String userID = arr.getJSONObject(0).getString("id");
+        final String YOUTUBE_KEY = "AIzaSyCMHwtenY0WUR2V5fZGonSYye9g6SoJ0wo";
+        String youtubeBody = "";
+        if (this.youtubeIdType == YOUTUBE_ID_TYPE.USERNAME) {
+            youtubeBody = getURLBody("https://www.googleapis.com/youtube/v3/channels?part=contentDetails&forUsername=" + youtubeHandle + "&key=" + YOUTUBE_KEY);
+        } else {
+            youtubeBody = getURLBody("https://www.googleapis.com/youtube/v3/channels?part=contentDetails&id=" + youtubeHandle + "&key=" + YOUTUBE_KEY);
+        }
+        JSONObject obj = new JSONObject(youtubeBody);
+        JSONArray arr = obj.getJSONArray("items");
+        String userID = arr.getJSONObject(0).getString("id");
 
-            youtubeBody = getURLBody("https://www.googleapis.com/youtube/v3/channels?part=statistics&id=" + userID + "&key=" + YOUTUBE_KEY);
-            obj = new JSONObject(youtubeBody);
-            arr = obj.getJSONArray("items");
-            int youtubeFollowers = arr.getJSONObject(0).getJSONObject("statistics").getInt("subscriberCount");
+        youtubeBody = getURLBody("https://www.googleapis.com/youtube/v3/channels?part=statistics&id=" + userID + "&key=" + YOUTUBE_KEY);
+        obj = new JSONObject(youtubeBody);
+        arr = obj.getJSONArray("items");
+        int youtubeFollowers = arr.getJSONObject(0).getJSONObject("statistics").getInt("subscriberCount");
 
-            return processFollowerCount(youtubeFollowers, 0);
-        } else return "";
+        return processFollowerCount(youtubeFollowers, 0);
     }
 
     public static String processFollowerCount(int n, int iteration) {
@@ -295,7 +294,10 @@ public class Person {
 
         // set Person name based on wiki page title (ensures proper spelling & punctuation)
         String title = wikiBody.substring(wikiBody.indexOf("<h1 id=\"firstHeading\"") + 53, wikiBody.indexOf("</h1>"));
-        if (title.contains("(")) title = title.substring(0, title.indexOf(" ("));
+        if (title.contains("(")) {
+            this.disambiguation = title.substring(title.indexOf("(") + 1, title.indexOf(")"));
+            title = title.substring(0, title.indexOf(" ("));
+        }
         this.name = title;
 
         // set wiki excerpt text
@@ -322,16 +324,16 @@ public class Person {
      */
     public void findProfilePic() {
         String encodedName = "";
-        try {
-            encodedName = URLEncoder.encode(this.name, "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        String urlStr = "https://api.cognitive.microsoft.com/bing/v7.0/images/search?q=" + encodedName;
+        String urlStr;
         URL url = null;
         try {
+            encodedName = URLEncoder.encode(this.name, "UTF-8");
+            urlStr = "https://api.cognitive.microsoft.com/bing/v7.0/images/search?q=" + encodedName;
+            if(this.disambiguation != null) urlStr += "+" + URLEncoder.encode(this.disambiguation, "UTF-8");
             url = new URL(urlStr);
         } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
 
