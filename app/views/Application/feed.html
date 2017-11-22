@@ -47,6 +47,11 @@
 </script>
 
 <div class="container-fluid">
+
+    <div id="scroll-to-top" title="Scroll to Top">
+        <i class="fa fa-angle-double-up" aria-hidden="true"></i>
+    </div>
+
     <div class="row top-bar">
         <div class="col-lg-4 search">
             <form class="form-inline" action="@{Application.feed(name)}" autocomplete="off">
@@ -141,6 +146,28 @@
 
     <script src="../../../public/javascripts/contentsize.js"></script>
     <script src="../../../public/javascripts/contentdisplay.js"></script>
+    <script>
+        var scrollButton = $('#scroll-to-top');
+        scrollButton.click(function() {
+            $('html, body').animate({ scrollTop: 0 }, 600);
+        });
+
+        $(window).on('scroll', function() {
+            var self = $(this);
+            var height = self.height();
+            var top = self.scrollTop();
+
+           if(showMoreClicked) {
+               if(top > height * 4) {
+                   if(!scrollButton.is(':visible')) {
+                       scrollButton.fadeIn(500);
+                   }
+               } else {
+                   scrollButton.fadeOut(500);
+               }
+           }
+        });
+    </script>
 
 </div>
 

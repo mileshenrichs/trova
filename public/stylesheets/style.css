@@ -105,6 +105,33 @@ body#home {
     border-bottom: 1px solid rgba(0, 0, 0, 0.5);
 }
 
+#scroll-to-top {
+    width: 35px;
+    height: 35px;
+    background: #252525;
+    color: #e3e3e3;
+    -moz-border-radius: 90px;
+    -webkit-border-radius: 90px;
+    border-radius: 90px;
+    position: fixed;
+    top: 40px;
+    right: 50px;
+    z-index: 1000;
+    cursor: pointer;
+    display: none;
+    opacity: 0.6;
+    transition: opacity 0.5s linear;
+}
+
+#scroll-to-top:hover {
+    opacity: 1;
+}
+
+#scroll-to-top i {
+    padding: 27% 0 0 35%;
+    font-size: 17px;
+}
+
 /* =================== NAV STYLES =================== */
 
 .top-bar {

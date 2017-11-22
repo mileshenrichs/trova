@@ -3,7 +3,7 @@
  * JS for content filtering, hide/show functionality
  */
 
-const INITIAL_DISPLAY_AMT = 6; // amount of content displayed prior to 'Show More' click
+const DISPLAY_AMT = 6; // amount of content displayed prior to 'Show More' click
 
 var filters = new Map(); // spans representing filter buttons
 filters.set('insta', null);
@@ -35,7 +35,7 @@ var startIndex = 0;
 var lastHiddenIndex = 0;
 
 // initial content cataloging
-for(var z = 0; z < INITIAL_DISPLAY_AMT; z++) {
+for(var z = 0; z < DISPLAY_AMT; z++) {
     if(allContent[z].className.includes('instagram')) {
         instaIndex++;
     } else if(allContent[z].className.includes('twitter')) {
@@ -62,7 +62,7 @@ checkMissingSocial();
 
 function initializeDisplay() {
     allContent.forEach(function (c) {
-        if(allContent.indexOf(c) > INITIAL_DISPLAY_AMT) {
+        if(allContent.indexOf(c) > DISPLAY_AMT) {
             $(c).hide();
         }
     });
@@ -146,11 +146,18 @@ function updatePostCounts() {
     }
 }
 
+var showMoreClicked = false;
+
 function showMore() {
+    showMoreClicked = true;
     var i = 0;
     startIndex = 0;
-    while(startIndex === 0 && i < allContent.length) {
-        if(allContent[i].style.display === 'none') startIndex = i;
+    var foundHidden = false;
+    while(!foundHidden && i < allContent.length) {
+        if(allContent[i].style.display === 'none') {
+            startIndex = i;
+            foundHidden = true;
+        }
         i++;
     }
     startIndex += lastHiddenIndex;
@@ -169,9 +176,9 @@ function showMore() {
         }
     }
 
-    // show and set height for INITIAL_DISPLAY_AMT more content rows
+    // show and set height for DISPLAY_AMT more content rows
     var j = startIndex;
-    while(j < startIndex + INITIAL_DISPLAY_AMT && j < allContent.length) {
+    while(j < startIndex + DISPLAY_AMT && j < allContent.length) {
         var contentSource = '';
         if(allContent[j].className.includes('instagram')) {
             instaIndex++;
