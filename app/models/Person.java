@@ -101,6 +101,7 @@ public class Person {
      * Returns String array of handles for a Person (wiki, instagram, twitter, youtube)
      */
     public static HashMap<String, String> findHandles(String name) {
+        long startTime = System.nanoTime();
 
         final String API_KEY = "AIzaSyCcwKvKOFc-feF-CHKnI24M6XY545AywE0";
         final String SEARCH_ENGINE_ID = "015057633729182102453:nujiwevepbo";
@@ -233,18 +234,24 @@ public class Person {
                 }
             }
         }
+        long endTime = System.nanoTime();
+        System.out.println("findHandles(): " + ((endTime - startTime) / 1000000000.0) + "seconds");
         return handles;
     }
 
     public String getInstaFollowers() {
+        long startTime = System.nanoTime();
         String instaBody = getURLBody("https://www.instagram.com/" + instaHandle + "/?__a=1");
         JSONObject instaObj = new JSONObject(instaBody);
         int instaFollowers = instaObj.getJSONObject("user").getJSONObject("followed_by").getInt("count");
 
+        long endTime = System.nanoTime();
+        System.out.println("getInstaFollowers(): " + ((endTime - startTime) / 1000000000.0) + "seconds");
         return processFollowerCount(instaFollowers, 0);
     }
 
     public String getTwitterFollowers() {
+        long startTime = System.nanoTime();
         Twitter twitter = getTwitterInstance();
         User twitterUser = null;
         try {
@@ -252,10 +259,13 @@ public class Person {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        long endTime = System.nanoTime();
+        System.out.println("getTwitterFollowers(): " + ((endTime - startTime) / 1000000000.0) + "seconds");
         return processFollowerCount(twitterUser.getFollowersCount(), 0);
     }
 
     public String getYoutubeFollowers() {
+        long startTime = System.nanoTime();
         final String YOUTUBE_KEY = "AIzaSyCMHwtenY0WUR2V5fZGonSYye9g6SoJ0wo";
         String youtubeBody = "";
         if (this.youtubeIdType == YOUTUBE_ID_TYPE.USERNAME) {
@@ -272,6 +282,8 @@ public class Person {
         arr = obj.getJSONArray("items");
         int youtubeFollowers = arr.getJSONObject(0).getJSONObject("statistics").getInt("subscriberCount");
 
+        long endTime = System.nanoTime();
+        System.out.println("getYoutubeFollowers(): " + ((endTime - startTime) / 1000000000.0) + "seconds");
         return processFollowerCount(youtubeFollowers, 0);
     }
 
@@ -290,6 +302,7 @@ public class Person {
      * Sets Person name and wiki excerpt fields by parsing Wikipedia record
      */
     public void retreiveWikiInfo() {
+        long startTime = System.nanoTime();
         String wikiBody = getURLBody("https://en.wikipedia.org/wiki/" + wikiHandle);
 
         // set Person name based on wiki page title (ensures proper spelling & punctuation)
@@ -317,12 +330,15 @@ public class Person {
         }
         excerpt = Jsoup.parse(excerpt).text().replaceAll("\\[(\\d+)]", ""); // remove HTML tags using Jsoup
         this.wikiExcerpt = trimExcerpt(excerpt);
+        long endTime = System.nanoTime();
+        System.out.println("retreiveWikiInfo(): " + ((endTime - startTime) / 1000000000.0) + "seconds");
     }
 
     /**
      * Sets Person profile pic URL by performing Bing image search
      */
     public void findProfilePic() {
+        long startTime = System.nanoTime();
         String encodedName = "";
         String urlStr;
         URL url = null;
@@ -355,6 +371,8 @@ public class Person {
             // select random profile image option from possible choices
             this.profileImgUrl = possibleImgUrls.get((int) Math.floor(Math.random() * (possibleImgUrls.size() - 1) + 1));
         }
+        long endTime = System.nanoTime();
+        System.out.println("findProfilePic(): " + ((endTime - startTime) / 1000000000.0) + "seconds");
     }
 
     public static List<String> getImageUrls(URL url) {
