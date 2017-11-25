@@ -36,7 +36,7 @@ public class YoutubeVideo {
     public static List<YoutubeVideo> getVideos(String username, YOUTUBE_ID_TYPE idType) {
         List<YoutubeVideo> videos = new ArrayList<>();
 
-        final String YOUTUBE_KEY = "AIzaSyCMHwtenY0WUR2V5fZGonSYye9g6SoJ0wo";
+        final String YOUTUBE_KEY = Keys.youtube();
 
         String body;
         if(idType == YOUTUBE_ID_TYPE.USERNAME) {

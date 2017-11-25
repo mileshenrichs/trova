@@ -103,7 +103,7 @@ public class Person {
     public static HashMap<String, String> findHandles(String name) {
         long startTime = System.nanoTime();
 
-        final String API_KEY = "AIzaSyCcwKvKOFc-feF-CHKnI24M6XY545AywE0";
+        final String API_KEY = Keys.google();
         final String SEARCH_ENGINE_ID = "015057633729182102453:nujiwevepbo";
 
         HashMap<String, String> handles = new HashMap<>();
@@ -169,7 +169,7 @@ public class Person {
 
             for(String missingHandle : missingHandles) {
                 if (missingHandle.equals("youtube")) {
-                    final String YOUTUBE_KEY = "AIzaSyCMHwtenY0WUR2V5fZGonSYye9g6SoJ0wo";
+                    final String YOUTUBE_KEY = Keys.youtube();
                     String youtubeJSON = getURLBody("https://www.googleapis.com/youtube/v3/search"
                             + "?part=id"
                             + "&q=" + encodedName
@@ -266,7 +266,7 @@ public class Person {
 
     public String getYoutubeFollowers() {
         long startTime = System.nanoTime();
-        final String YOUTUBE_KEY = "AIzaSyCMHwtenY0WUR2V5fZGonSYye9g6SoJ0wo";
+        final String YOUTUBE_KEY = Keys.youtube();
         String youtubeBody = "";
         if (this.youtubeIdType == YOUTUBE_ID_TYPE.USERNAME) {
             youtubeBody = getURLBody("https://www.googleapis.com/youtube/v3/channels?part=contentDetails&forUsername=" + youtubeHandle + "&key=" + YOUTUBE_KEY);
@@ -376,7 +376,7 @@ public class Person {
     }
 
     public static List<String> getImageUrls(URL url) {
-        final String SUBSCRIPTION_KEY = "7c05d6c68ffb4213bde88bb1b8aca677";
+        final String SUBSCRIPTION_KEY = Keys.bing();
         HttpsURLConnection connection = null;
         try {
             connection = (HttpsURLConnection) url.openConnection();
