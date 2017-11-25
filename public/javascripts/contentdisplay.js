@@ -22,6 +22,7 @@ postCounts.set('youtube-vids-amt', null);
 
 var instaPosts = Array.from(document.getElementsByClassName('instagram'));
 var tweets = Array.from(document.getElementsByClassName('twitter'));
+setRetweetBackgroundImages();
 var youtubeVids = Array.from(document.getElementsByClassName('youtube'));
 
 var allContent = Array.from(document.getElementsByClassName('content-row'));
@@ -136,6 +137,17 @@ function toggleFilter() {
                 });
         }
     }
+}
+
+function setRetweetBackgroundImages() {
+    debugger;
+    var tweetPs = $("[dir=ltr]");
+    tweetPs.each(function () {
+       if($(this).html().substring(0, 2) === 'RT') {
+           tweets[tweetPs.index($(this))].style.background =
+               'url("../../public/images/row-bgs/twitter-rt.png") no-repeat center, radial-gradient(circle, #008EC4, #003C52)';
+       }
+    });
 }
 
 function updatePostCounts() {

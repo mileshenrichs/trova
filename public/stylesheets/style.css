@@ -9,7 +9,7 @@ h1, a, ul li a {
 /* ##################### HOMEPAGE ##################### */
 
 body#home {
-    background: url(../../public/images/home/sky-buildings-dark.jpg) no-repeat center center fixed;
+    background: url("../../public/images/home/sky-buildings-dark.jpg") no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -39,7 +39,7 @@ body#home {
 }
 
 #home form {
-    margin-left: 33%;
+    margin-left: 32%;
 }
 
 #home input {
@@ -91,7 +91,7 @@ body#home {
     font-family: 'Cabin', sans-serif;
     font-size: 20px;
     color: #CCCCCC;
-    margin: 10px 0 40px 45.5%;
+    margin: 10px 0 40px 43%;
 }
 
 #home h2 i {
@@ -475,11 +475,11 @@ body#home {
 }
 
 .twitter {
-    background: #008EC4;
-    background: -webkit-radial-gradient(circle, #008EC4, #003C52);
-    background: -o-radial-gradient(circle, #008EC4, #003C52);
-    background: -moz-radial-gradient(circle, #008EC4, #003C52);
-    background: radial-gradient(circle, #008EC4, #003C52);
+    background: url("../../public/images/row-bgs/twitter.png") no-repeat center, #008EC4;
+    background: url("../../public/images/row-bgs/twitter.png") no-repeat center, -webkit-radial-gradient(circle, #008EC4, #003C52);
+    background: url("../../public/images/row-bgs/twitter.png") no-repeat center, -o-radial-gradient(circle, #008EC4, #003C52);
+    background: url("../../public/images/row-bgs/twitter.png") no-repeat center, -moz-radial-gradient(circle, #008EC4, #003C52);
+    background: url("../../public/images/row-bgs/twitter.png") no-repeat center, radial-gradient(circle, #008EC4, #003C52);
     height: 200px;
 }
 
@@ -490,22 +490,22 @@ body#home {
 }
 
 .youtube {
-    background: #C20000;
-    background: -webkit-radial-gradient(circle, #C20000, #7F0000);
-    background: -o-radial-gradient(circle, #C20000, #7F0000);
-    background: -moz-radial-gradient(circle, #C20000, #7F0000);
-    background: radial-gradient(circle, #C20000, #7F0000);
+    background: url("../../public/images/row-bgs/youtube.png") no-repeat center, #C20000;
+    background: url("../../public/images/row-bgs/youtube.png") no-repeat center, -webkit-radial-gradient(circle, #C20000, #7F0000);
+    background: url("../../public/images/row-bgs/youtube.png") no-repeat center, -o-radial-gradient(circle, #C20000, #7F0000);
+    background: url("../../public/images/row-bgs/youtube.png") no-repeat center, -moz-radial-gradient(circle, #C20000, #7F0000);
+    background: url("../../public/images/row-bgs/youtube.png") no-repeat center, radial-gradient(circle, #C20000, #7F0000);
     height: 355px;
 }
 
 /* =================== INSTAGRAM STYLES =================== */
 
 .instagram {
-    background: #5F287F;
-    background: -webkit-radial-gradient(circle, #C92E94, #5F287F);
-    background: -o-radial-gradient(circle, #C92E94, #5F287F);
-    background: -moz-radial-gradient(circle, #C92E94, #5F287F);
-    background: radial-gradient(circle, #C92E94, #5F287F);
+    background: url("../../public/images/row-bgs/insta.png") no-repeat center, #5F287F;
+    background: url("../../public/images/row-bgs/insta.png") no-repeat center, -webkit-radial-gradient(circle, #C92E94, #5F287F);
+    background: url("../../public/images/row-bgs/insta.png") no-repeat center, -o-radial-gradient(circle, #C92E94, #5F287F);
+    background: url("../../public/images/row-bgs/insta.png") no-repeat center, -moz-radial-gradient(circle, #C92E94, #5F287F);
+    background: url("../../public/images/row-bgs/insta.png") no-repeat center, radial-gradient(circle, #C92E94, #5F287F);
     height: 575px;
 }
 
