@@ -12,6 +12,7 @@ public class Post implements Comparable<Post> {
     public Tweet tweet;
     public YoutubeVideo youtubeVideo;
     public InstaPost instaPost;
+    public FacebookPost fbPost;
 
     public Post(Tweet tweet) {
         this.mediaType = MEDIA_TYPE.TWITTER;
@@ -31,6 +32,12 @@ public class Post implements Comparable<Post> {
         this.instaPost = post;
     }
 
+    public Post(FacebookPost post) {
+        this.mediaType = MEDIA_TYPE.FACEBOOK;
+        this.date = post.getPostDate();
+        this.fbPost = post;
+    }
+
     public MEDIA_TYPE getType() {
         return this.mediaType;
     }
@@ -43,8 +50,12 @@ public class Post implements Comparable<Post> {
         return this.youtubeVideo;
     }
 
-    public InstaPost getPost() {
+    public InstaPost getInstaPost() {
         return this.instaPost;
+    }
+
+    public FacebookPost getFbPost() {
+        return fbPost;
     }
 
     @Override
@@ -60,6 +71,7 @@ public class Post implements Comparable<Post> {
     public enum MEDIA_TYPE {
         TWITTER,
         YOUTUBE,
-        INSTAGRAM
+        INSTAGRAM,
+        FACEBOOK
     }
 }

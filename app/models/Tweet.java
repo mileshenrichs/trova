@@ -14,8 +14,8 @@ import java.util.List;
  * A twitter status.
  */
 public class Tweet {
-    public Status status;
-    public LocalDateTime postDate;
+    private Status status;
+    private LocalDateTime postDate;
 
     public Tweet(Status status, LocalDateTime date) {
         this.status = status;

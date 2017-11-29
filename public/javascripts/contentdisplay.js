@@ -69,8 +69,8 @@ function initializeDisplay() {
     });
 }
 
-var showMoreButton = document.getElementsByClassName('show-more')[0];
-showMoreButton.addEventListener('click', showMore);
+// var showMoreButton = document.getElementsByClassName('show-more')[0];
+// showMoreButton.addEventListener('click', showMore);
 
 function toggleFilter() {
     // find lastHiddenIndex prior to hiding stuff
@@ -140,7 +140,6 @@ function toggleFilter() {
 }
 
 function setRetweetBackgroundImages() {
-    debugger;
     var tweetPs = $("[dir=ltr]");
     tweetPs.each(function () {
        if($(this).html().substring(0, 2) === 'RT') {
@@ -158,72 +157,72 @@ function updatePostCounts() {
     }
 }
 
-var showMoreClicked = false;
-
-function showMore() {
-    showMoreClicked = true;
-    var i = 0;
-    startIndex = 0;
-    var foundHidden = false;
-    while(!foundHidden && i < allContent.length) {
-        if(allContent[i].style.display === 'none') {
-            startIndex = i;
-            foundHidden = true;
-        }
-        i++;
-    }
-    startIndex += lastHiddenIndex;
-
-    // catalogue source of each content row up to startIndex
-    tweetIndex = -1;
-    instaIndex = -1;
-    youtubeVidIndex = -1;
-    for(var z = 0; z < startIndex; z++) {
-        if(allContent[z].className.includes('instagram')) {
-            instaIndex++;
-        } else if(allContent[z].className.includes('twitter')) {
-            tweetIndex++;
-        } else if(allContent[z].className.includes('youtube')) {
-            youtubeVidIndex++;
-        }
-    }
-
-    // show and set height for DISPLAY_AMT more content rows
-    var j = startIndex;
-    while(j < startIndex + DISPLAY_AMT && j < allContent.length) {
-        var contentSource = '';
-        if(allContent[j].className.includes('instagram')) {
-            instaIndex++;
-            contentSource = 'insta';
-        } else if(allContent[j].className.includes('twitter')) {
-            tweetIndex++;
-            contentSource = 'twitter';
-        } else if(allContent[j].className.includes('youtube')) {
-            youtubeVidIndex++;
-        }
-
-        // hide show more button after last content is visible
-        if(j + 1 === allContent.length) {
-            $(showMoreButton).slideUp();
-        }
-
-        // show content if not currently filtered
-        var contentClass = allContent[j].className.substring(22);
-        if(contentClass === 'instagram') contentClass = 'insta';
-        if(filtersOn.get(contentClass)) {
-            $(allContent[j]).show();
-        }
-
-        if(contentSource !== '') {
-            if(contentSource === 'insta') {
-                allContent[j].style.height = instaContainerHeights[instaIndex];
-            } else {
-                allContent[j].style.height = tweetContainerHeights[tweetIndex];
-            }
-        }
-        j++;
-    }
-}
+// var showMoreClicked = false;
+//
+// function showMore() {
+//     showMoreClicked = true;
+//     var i = 0;
+//     startIndex = 0;
+//     var foundHidden = false;
+//     while(!foundHidden && i < allContent.length) {
+//         if(allContent[i].style.display === 'none') {
+//             startIndex = i;
+//             foundHidden = true;
+//         }
+//         i++;
+//     }
+//     startIndex += lastHiddenIndex;
+//
+//     // catalogue source of each content row up to startIndex
+//     tweetIndex = -1;
+//     instaIndex = -1;
+//     youtubeVidIndex = -1;
+//     for(var z = 0; z < startIndex; z++) {
+//         if(allContent[z].className.includes('instagram')) {
+//             instaIndex++;
+//         } else if(allContent[z].className.includes('twitter')) {
+//             tweetIndex++;
+//         } else if(allContent[z].className.includes('youtube')) {
+//             youtubeVidIndex++;
+//         }
+//     }
+//
+//     // show and set height for DISPLAY_AMT more content rows
+//     var j = startIndex;
+//     while(j < startIndex + DISPLAY_AMT && j < allContent.length) {
+//         var contentSource = '';
+//         if(allContent[j].className.includes('instagram')) {
+//             instaIndex++;
+//             contentSource = 'insta';
+//         } else if(allContent[j].className.includes('twitter')) {
+//             tweetIndex++;
+//             contentSource = 'twitter';
+//         } else if(allContent[j].className.includes('youtube')) {
+//             youtubeVidIndex++;
+//         }
+//
+//         // hide show more button after last content is visible
+//         if(j + 1 === allContent.length) {
+//             $(showMoreButton).slideUp();
+//         }
+//
+//         // show content if not currently filtered
+//         var contentClass = allContent[j].className.substring(22);
+//         if(contentClass === 'instagram') contentClass = 'insta';
+//         if(filtersOn.get(contentClass)) {
+//             $(allContent[j]).show();
+//         }
+//
+//         if(contentSource !== '') {
+//             if(contentSource === 'insta') {
+//                 allContent[j].style.height = instaContainerHeights[instaIndex];
+//             } else {
+//                 allContent[j].style.height = tweetContainerHeights[tweetIndex];
+//             }
+//         }
+//         j++;
+//     }
+// }
 
 function checkMissingSocial() {
     var missingSocial = [];

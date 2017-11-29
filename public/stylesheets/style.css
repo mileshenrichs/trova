@@ -136,11 +136,15 @@ body#home {
 
 .top-bar {
     height: 65px;
+    width: 100%;
     background: #000;
     background: -webkit-linear-gradient(#252525, #101010);
     background: -o-linear-gradient(#252525, #101010);
     background: -moz-linear-gradient(#252525, #101010);
     background: linear-gradient(#252525, #101010);
+    position: fixed;
+    z-index: 1000;
+    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.4);
 }
 
 .top-bar form {
@@ -187,6 +191,7 @@ body#home {
     padding: 14px 20px 0 160px;
     height: 350px;
     border-bottom: 3px solid #101010;
+    margin-top: 65px;
 }
 
 .person-details .p-pic {
@@ -466,7 +471,7 @@ body#home {
 
 .tweet-center {
     padding-top: 10px;
-    margin: 0 0 0 32%;
+    margin: 0 0 0 31.2%;
 }
 
 .tweet-center-tall {
@@ -486,7 +491,7 @@ body#home {
 /* =================== YOUTUBE STYLES =================== */
 
 .youtube iframe {
-    margin: 20px 0 0 29.8%;
+    margin: 20px 0 0 29.2%;
 }
 
 .youtube {
@@ -511,7 +516,37 @@ body#home {
 
 .insta-positioning {
     display: block;
-    margin: 15px 0 0 37.5%;
+    margin: 15px 0 0 36.8%;
+}
+
+/* =================== FACEBOOK STYLES =================== */
+
+.facebook {
+    background: url("../../public/images/row-bgs/facebook.png") no-repeat center, #3B5998;
+    background: url("../../public/images/row-bgs/facebook.png") no-repeat center, -webkit-radial-gradient(circle, #4163A8, #1F2E4F);
+    background: url("../../public/images/row-bgs/facebook.png") no-repeat center, -o-radial-gradient(circle, #4163A8, #1F2E4F);
+    background: url("../../public/images/row-bgs/facebook.png") no-repeat center, -moz-radial-gradient(circle, #4163A8, #1F2E4F);
+    background: url("../../public/images/row-bgs/facebook.png") no-repeat center, radial-gradient(circle, #4163A8, #1F2E4F);
+    height: 500px;
+    padding-top: 20px;
+    position: relative;
+}
+
+.facebook .fb-post {
+    margin-left: 35.7%;
+    z-index: 10;
+}
+
+.post-white-bg {
+    display: block;
+    width: 379px;
+    height: 470px;
+    position: absolute;
+    left: 36.1%;
+    top: 20px;
+    background: #fff;
+    border-radius: 2px;
+    visibility: hidden;
 }
 
 /* =================== SHOW MORE BUTTON =================== */

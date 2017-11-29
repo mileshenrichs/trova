@@ -12,6 +12,11 @@ var instaFrames;
 var instaContainers;
 var instaContainerHeights = [];
 
+var fbFrames;
+var fbContainers;
+var fbContainerHeights = [];
+var fbFrameHeights = [];
+
 
 window.onload = function() {
     tweetFrames = document.getElementsByClassName('twitter-tweet twitter-tweet-rendered');
@@ -25,6 +30,19 @@ window.onload = function() {
         if(instaFrames.length === instaContainers.length) {
             clearInterval(findFrames);
             setInstaContainerHeights();
+        }
+    }, 1000);
+
+    fbContainers = document.getElementsByClassName('facebook');
+    var findFbFrames = setInterval(function () {
+        fbFrames = Array.from(document.getElementsByClassName('fb-post fb_iframe_widget'));
+        fbFrameHeights = [];
+        fbFrames.forEach(function (frame) {
+            fbFrameHeights.push(frame.offsetHeight);
+        });
+        if(fbFrames.length === fbContainers.length && !fbFrameHeights.includes(0) && !fbFrameHeights.includes(20)) {
+            clearInterval(findFbFrames);
+            setFacebookContainerHeights();
         }
     }, 1000);
 };
@@ -59,6 +77,19 @@ function setInstaContainerHeights() {
         instaContainers[i].style.height = (instaFrames[i].offsetHeight + 40).toString() + 'px';
         instaContainerHeights.push((instaFrames[i].offsetHeight + 40).toString() + 'px');
     }
-    initializeDisplay();
+    // initializeDisplay();
+}
+
+function setFacebookContainerHeights() {
+    fbFrames.forEach(function (frm) {
+        console.log(frm.offsetHeight.toString());
+    });
+    var frameBgs = Array.from(document.getElementsByClassName('post-white-bg'));
+    for(var i = 0; i < fbContainers.length; i++) {
+        fbContainers[i].style.height = (fbFrames[i].offsetHeight + 40).toString() + 'px';
+        frameBgs[i].style.height = fbFrames[i].offsetHeight.toString() + 'px';
+        frameBgs[i].style.visibility = 'visible';
+        fbContainerHeights.push((fbFrames[i].offsetHeight + 40).toString() + 'px');
+    }
 }
 

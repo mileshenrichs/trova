@@ -38,6 +38,7 @@ public class Person {
     private String twitterHandle;
     private String youtubeHandle;
     private YOUTUBE_ID_TYPE youtubeIdType;
+    private String facebookHandle;
 
     public Person(long id, String name, String imgUrl, String excerpt, HashMap<String, String> handles) {
         this.id = id;
@@ -51,6 +52,7 @@ public class Person {
         if(handles.containsKey("youtubeIdType")) {
             this.youtubeIdType = YOUTUBE_ID_TYPE.valueOf(handles.get("youtubeIdType"));
         }
+        this.facebookHandle = handles.get("facebook");
     }
 
     /**
@@ -67,6 +69,10 @@ public class Person {
 
     public String getName() {
         return name;
+    }
+
+    public String getDisambiguation() {
+        return disambiguation;
     }
 
     public String getProfileImgUrl() {
@@ -95,6 +101,10 @@ public class Person {
 
     public YOUTUBE_ID_TYPE getYoutubeIdType() {
         return youtubeIdType;
+    }
+
+    public String getFacebookHandle() {
+        return facebookHandle;
     }
 
     /**
@@ -240,51 +250,54 @@ public class Person {
     }
 
     public String getInstaFollowers() {
-        long startTime = System.nanoTime();
-        String instaBody = getURLBody("https://www.instagram.com/" + instaHandle + "/?__a=1");
-        JSONObject instaObj = new JSONObject(instaBody);
-        int instaFollowers = instaObj.getJSONObject("user").getJSONObject("followed_by").getInt("count");
-
-        long endTime = System.nanoTime();
-        System.out.println("getInstaFollowers(): " + ((endTime - startTime) / 1000000000.0) + "seconds");
-        return processFollowerCount(instaFollowers, 0);
+        return "0";
+//        long startTime = System.nanoTime();
+//        String instaBody = getURLBody("https://www.instagram.com/" + instaHandle + "/?__a=1");
+//        JSONObject instaObj = new JSONObject(instaBody);
+//        int instaFollowers = instaObj.getJSONObject("user").getJSONObject("followed_by").getInt("count");
+//
+//        long endTime = System.nanoTime();
+//        System.out.println("getInstaFollowers(): " + ((endTime - startTime) / 1000000000.0) + "seconds");
+//        return processFollowerCount(instaFollowers, 0);
     }
 
     public String getTwitterFollowers() {
-        long startTime = System.nanoTime();
-        Twitter twitter = getTwitterInstance();
-        User twitterUser = null;
-        try {
-            twitterUser = twitter.showUser(twitterHandle);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        long endTime = System.nanoTime();
-        System.out.println("getTwitterFollowers(): " + ((endTime - startTime) / 1000000000.0) + "seconds");
-        return processFollowerCount(twitterUser.getFollowersCount(), 0);
+        return "0";
+//        long startTime = System.nanoTime();
+//        Twitter twitter = getTwitterInstance();
+//        User twitterUser = null;
+//        try {
+//            twitterUser = twitter.showUser(twitterHandle);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        long endTime = System.nanoTime();
+//        System.out.println("getTwitterFollowers(): " + ((endTime - startTime) / 1000000000.0) + "seconds");
+//        return processFollowerCount(twitterUser.getFollowersCount(), 0);
     }
 
     public String getYoutubeFollowers() {
-        long startTime = System.nanoTime();
-        final String YOUTUBE_KEY = Keys.youtube();
-        String youtubeBody = "";
-        if (this.youtubeIdType == YOUTUBE_ID_TYPE.USERNAME) {
-            youtubeBody = getURLBody("https://www.googleapis.com/youtube/v3/channels?part=contentDetails&forUsername=" + youtubeHandle + "&key=" + YOUTUBE_KEY);
-        } else {
-            youtubeBody = getURLBody("https://www.googleapis.com/youtube/v3/channels?part=contentDetails&id=" + youtubeHandle + "&key=" + YOUTUBE_KEY);
-        }
-        JSONObject obj = new JSONObject(youtubeBody);
-        JSONArray arr = obj.getJSONArray("items");
-        String userID = arr.getJSONObject(0).getString("id");
-
-        youtubeBody = getURLBody("https://www.googleapis.com/youtube/v3/channels?part=statistics&id=" + userID + "&key=" + YOUTUBE_KEY);
-        obj = new JSONObject(youtubeBody);
-        arr = obj.getJSONArray("items");
-        int youtubeFollowers = arr.getJSONObject(0).getJSONObject("statistics").getInt("subscriberCount");
-
-        long endTime = System.nanoTime();
-        System.out.println("getYoutubeFollowers(): " + ((endTime - startTime) / 1000000000.0) + "seconds");
-        return processFollowerCount(youtubeFollowers, 0);
+        return "0";
+//        long startTime = System.nanoTime();
+//        final String YOUTUBE_KEY = Keys.youtube();
+//        String youtubeBody = "";
+//        if (this.youtubeIdType == YOUTUBE_ID_TYPE.USERNAME) {
+//            youtubeBody = getURLBody("https://www.googleapis.com/youtube/v3/channels?part=contentDetails&forUsername=" + youtubeHandle + "&key=" + YOUTUBE_KEY);
+//        } else {
+//            youtubeBody = getURLBody("https://www.googleapis.com/youtube/v3/channels?part=contentDetails&id=" + youtubeHandle + "&key=" + YOUTUBE_KEY);
+//        }
+//        JSONObject obj = new JSONObject(youtubeBody);
+//        JSONArray arr = obj.getJSONArray("items");
+//        String userID = arr.getJSONObject(0).getString("id");
+//
+//        youtubeBody = getURLBody("https://www.googleapis.com/youtube/v3/channels?part=statistics&id=" + userID + "&key=" + YOUTUBE_KEY);
+//        obj = new JSONObject(youtubeBody);
+//        arr = obj.getJSONArray("items");
+//        int youtubeFollowers = arr.getJSONObject(0).getJSONObject("statistics").getInt("subscriberCount");
+//
+//        long endTime = System.nanoTime();
+//        System.out.println("getYoutubeFollowers(): " + ((endTime - startTime) / 1000000000.0) + "seconds");
+//        return processFollowerCount(youtubeFollowers, 0);
     }
 
     public static String processFollowerCount(int n, int iteration) {
