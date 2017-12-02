@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:700');
 @import url('https://fonts.googleapis.com/css?family=Lato');
 @import url('https://fonts.googleapis.com/css?family=Cabin:400,700');
+@import url('https://fonts.googleapis.com/css?family=Oswald');
 
 h1, a, ul li a {
     transition: all 0.3s linear;
@@ -21,7 +22,7 @@ body#home {
     height: 115px;
     position: absolute;
     left: 50%;
-    top: 75px;
+    top: 60px;
     transform: translateX(-50%);
     opacity: 0;
     -webkit-transition: opacity 1.5s ease-in;
@@ -34,12 +35,63 @@ body#home {
     opacity: 1;
 }
 
+/* =================== HOME NAVIGATION =================== */
+
+#home nav {
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px;
+    position: relative;
+    top: 115px;
+    left: 30.7%;
+    display: inline-block;
+}
+
+#home nav a {
+    color: #fff;
+    margin-right: 40px;
+}
+
+#home nav a:hover {
+    text-decoration: none;
+}
+
+#home nav a#break {
+    margin-right: 240px;
+}
+
+/*Todo: add something here*/
+
 #under-logo {
     margin-top: 250px;
 }
 
+#home h1 {
+    font-family: 'Cabin', sans-serif;
+    font-size: 40px;
+    font-weight: bold;
+    color: #EDEDED;
+    margin: 0 0 0 28.5%;
+}
+
+#home h2 {
+    font-family: 'Cabin', sans-serif;
+    font-size: 20px;
+    color: #CCCCCC;
+    margin: 10px 0 40px 43%;
+    animation-delay: .25s;
+    -moz-animation-delay: .25s;
+    -webkit-animation-delay: .25s;
+}
+
+#home h2 i {
+    font-size: 15px;
+}
+
 #home form {
     margin-left: 32%;
+    animation-delay: .5s;
+    -moz-animation-delay: .5s;
+    -webkit-animation-delay: .5s;
 }
 
 #home input {
@@ -77,25 +129,6 @@ body#home {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-size: 25px;
-}
-
-#home h1 {
-    font-family: 'Cabin', sans-serif;
-    font-size: 40px;
-    font-weight: bold;
-    color: #EDEDED;
-    margin: 0 0 0 28.5%;
-}
-
-#home h2 {
-    font-family: 'Cabin', sans-serif;
-    font-size: 20px;
-    color: #CCCCCC;
-    margin: 10px 0 40px 43%;
-}
-
-#home h2 i {
-    font-size: 15px;
 }
 
 /* ##################### FEED ##################### */

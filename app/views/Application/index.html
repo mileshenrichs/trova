@@ -30,24 +30,30 @@
     <div class="row">
         <div class="col-lg-12">
             <a id="logo-link" href="#"><img id="logo" src="../../../public/images/logo.png" alt="Trova" /></a>
+            <nav class="animated fadeInDown">
+                <a href="#">STATISTICS</a>
+                <a href="#" id="break">ABOUT</a>
+                <a href="#">MY FEED</a>
+                <a href="#" id="user-account">LOG IN/REGISTER</a>
+            </nav>
         </div>
     </div>
 
     <div class="row" id="under-logo">
-        <div class="col-lg-12 animated fadeInUp">
+        <div class="col-lg-12">
 
             <div class="row">
                 <div class="col-lg-12">
-                    <h1>Learn more through social media.</h1>
-                    <h2>search for someone <i class="fa fa-angle-double-down" aria-hidden="true"></i></h2>
+                    <h1 class="animated fadeInUp">Learn more through social media.</h1>
+                    <h2 class="animated fadeInUp">search for someone <i class="fa fa-angle-double-down" aria-hidden="true"></i></h2>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-lg-12">
-                    <form class="form-inline" action="@{Application.feed(name)}" autocomplete="off">
+                    <form class="form-inline animated fadeInUp" action="@{Application.feed(blame)}" autocomplete="off">
                         <div class="input-group">
-                            <input type="text" class="form-control" name="name" value="${name}" placeholder="I want to find..." autofocus>
+                            <input type="text" class="form-control" name="blame" value="${blame}" placeholder="I want to find..." autofocus>
                             <span class="input-group-btn">
                                 <button class="btn" type="submit">
                                     <i class="fa fa-search" aria-hidden="true"></i>
