@@ -196,16 +196,16 @@ body#home {
 }
 
 .top-bar .logo {
-    margin: 7px 0 0 13%;
+    padding: 7px 0 0 15%;
 }
 
-.top-bar img {
+.top-bar img#logo-img {
     width: 70px;
     height: 50px;
     display: inline-block;
 }
 
-.top-bar img:hover {
+.top-bar img#logo-img:hover {
     -webkit-transition: .5s ease-in-out;
     -moz-transition: .5s ease-in-out;
     -o-transition: .5s ease-in-out;
@@ -215,6 +215,64 @@ body#home {
     -ms-transform: scale(1.15);
     -o-transform: scale(1.15);
     transform: scale(1.15);
+}
+
+.top-bar .navigation {
+    padding: 18px 0 0 20%;
+}
+
+.top-bar .navigation img {
+    width: 35px;
+    height: 29px;
+    cursor: pointer;
+}
+
+ul#dropdown-nav {
+    position: fixed;
+    top: -300px;
+    right: 10.5%;
+    width: 250px;
+    list-style-type: none;
+    z-index: 900;
+    font-family: 'Cabin', sans-serif;
+    border: 1px solid #101010;
+    border-top-width: 0;
+    padding: 0;
+}
+
+ul#dropdown-nav li a {
+    color: #e3e3e3;
+    display: block;
+    background-color: #101010;
+    height: 46px;
+    text-align: center;
+    font-size: 14px;
+    padding-top: 13px;
+}
+
+ul#dropdown-nav li a:hover {
+    text-decoration: none;
+    background-color: #252525;
+}
+
+ul#dropdown-nav li:nth-child(1) a {
+    border-bottom: 1px solid rgba(7, 179, 255, 0.5);
+}
+
+ul#dropdown-nav li:nth-child(2) a {
+    border-bottom: 1px solid rgba(227, 0, 248, 0.5);
+}
+
+ul#dropdown-nav li:nth-child(3) a {
+    border-bottom: 1px solid rgba(254, 2, 0, 0.5);
+}
+
+ul#dropdown-nav li:nth-child(4) a {
+    border-bottom: 1px solid rgba(211, 81, 0, 0.5);
+}
+
+ul#dropdown-nav li:nth-child(5) a {
+    border-bottom: 1px solid rgba(166, 255, 128, 0.5);
 }
 
 /* =================== PERSON DETAILS STYLES =================== */

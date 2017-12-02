@@ -16,7 +16,7 @@ public class Application extends Controller {
         render();
     }
 
-    public static void feed(String name) {
+    public static void viewPerson(String name) {
         HashMap<String, String> uziHandles = new HashMap<>();
         uziHandles.put("wiki", "Lil_Uzi_Vert");
         uziHandles.put("insta", "liluzivert");
@@ -38,32 +38,32 @@ public class Application extends Controller {
         for(InstaPost instaPost : instaPosts) {
             posts.add(new Post(instaPost));
         }
-
-        startTime = System.nanoTime();
-        List<Tweet> tweets = getTweets(person.getTwitterHandle());
-        endTime = System.nanoTime();
-        System.out.println("getTweets(): " + ((endTime - startTime) / 1000000000.0) + "seconds");
-        for(Tweet tweet : tweets) {
-            posts.add(new Post(tweet));
-        }
-
-        if(person.getYoutubeHandle() != null) {
-            startTime = System.nanoTime();
-            List<YoutubeVideo> videos = getVideos(person.getYoutubeHandle(), person.getYoutubeIdType());
-            endTime = System.nanoTime();
-            System.out.println("getVideos(): " + ((endTime - startTime) / 1000000000.0) + "seconds");
-            for (YoutubeVideo video : videos) {
-                posts.add(new Post(video));
-            }
-        }
-
-        startTime = System.nanoTime();
-        List<FacebookPost> fbPosts = getFacebookPosts("LilUziVert");
-        endTime = System.nanoTime();
-        System.out.println("getFacebookPosts(): " + ((endTime - startTime) / 1000000000.0) + "seconds");
-        for(FacebookPost fbPost : fbPosts) {
-            posts.add(new Post(fbPost));
-        }
+//
+//        startTime = System.nanoTime();
+//        List<Tweet> tweets = getTweets(person.getTwitterHandle());
+//        endTime = System.nanoTime();
+//        System.out.println("getTweets(): " + ((endTime - startTime) / 1000000000.0) + "seconds");
+//        for(Tweet tweet : tweets) {
+//            posts.add(new Post(tweet));
+//        }
+//
+//        if(person.getYoutubeHandle() != null) {
+//            startTime = System.nanoTime();
+//            List<YoutubeVideo> videos = getVideos(person.getYoutubeHandle(), person.getYoutubeIdType());
+//            endTime = System.nanoTime();
+//            System.out.println("getVideos(): " + ((endTime - startTime) / 1000000000.0) + "seconds");
+//            for (YoutubeVideo video : videos) {
+//                posts.add(new Post(video));
+//            }
+//        }
+//
+//        startTime = System.nanoTime();
+//        List<FacebookPost> fbPosts = getFacebookPosts("LilUziVert");
+//        endTime = System.nanoTime();
+//        System.out.println("getFacebookPosts(): " + ((endTime - startTime) / 1000000000.0) + "seconds");
+//        for(FacebookPost fbPost : fbPosts) {
+//            posts.add(new Post(fbPost));
+//        }
 
 //        startTime = System.nanoTime();
         Collections.sort(posts);

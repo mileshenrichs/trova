@@ -51,9 +51,9 @@
 
             <div class="row">
                 <div class="col-lg-12">
-                    <form class="form-inline animated fadeInUp" action="@{Application.feed(blame)}" autocomplete="off">
+                    <form class="form-inline animated fadeInUp" action="@{Application.viewPerson(name)}" autocomplete="off">
                         <div class="input-group">
-                            <input type="text" class="form-control" name="blame" value="${blame}" placeholder="I want to find..." autofocus>
+                            <input type="text" class="form-control" name="name" value="${name}" placeholder="I want to find..." autofocus>
                             <span class="input-group-btn">
                                 <button class="btn" type="submit">
                                     <i class="fa fa-search" aria-hidden="true"></i>

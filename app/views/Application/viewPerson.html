@@ -55,7 +55,7 @@
 
     <div class="row top-bar">
         <div class="col-lg-4 search">
-            <form class="form-inline" action="@{Application.feed(name)}" autocomplete="off">
+            <form class="form-inline" action="@{Application.viewPerson(name)}" autocomplete="off">
                 <div class="input-group">
                     <input type="text" class="form-control" id="search-input" name="name" value="${name}" placeholder="Search again...">
                 </div>
@@ -63,10 +63,21 @@
         </div>
         <div class="col-lg-4 logo">
             <a href="@{controllers.Application.index()}">
-                <img src="../../../public/images/logo.png" alt="Trova"/>
+                <img id="logo-img" src="../../../public/images/logo.png" alt="Trova"/>
             </a>
         </div>
+        <div class="col-lg-4 navigation">
+            <img id="nav-icon" src="../../../public/images/menu-icon.png" alt="Navigation Menu">
+        </div>
     </div>
+
+    <ul id="dropdown-nav">
+        <li><a href="#">My Feed</a></li>
+        <li><a href="#">Best Content</a></li>
+        <li><a href="#">About Trova</a></li>
+        <li><a href="#">My Profile</a></li>
+        <li><a href="#">Sign Out</a></li>
+    </ul>
 
     <div class="row person-details">
         <div class="col-lg-4 p-pic">
@@ -155,6 +166,7 @@
 
     <script src="../../../public/javascripts/contentsize.js"></script>
     <script src="../../../public/javascripts/contentdisplay.js"></script>
+    <script src="../../../public/javascripts/nav.js"></script>
     <script>
         var scrollButton = $('#scroll-to-top');
         scrollButton.click(function() {

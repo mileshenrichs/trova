@@ -5,7 +5,7 @@
 # Home page
 GET     /                                       Application.index
 
-GET     /feed                                   Application.feed
+GET     /find                                   Application.viewPerson
 
 # Ignore favicon requests
 GET     /favicon.ico                            404
