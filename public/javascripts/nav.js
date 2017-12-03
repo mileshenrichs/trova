@@ -15,6 +15,7 @@ $(dropdown).on('mouseover', function () {
 $(dropdown).on('mouseleave', function () {
    mouseInNav = false;
     $(dropdown).animate({top: "-300px"}, 500);
+    $(navIcon).attr('src', '../../../public/images/menu-icon.png');
 });
 
 $(navIcon).on('mouseover', function () {
@@ -25,9 +26,9 @@ $(navIcon).on('mouseover', function () {
 
 $(navIcon).on('mouseout', function () {
     mouseOnNavIcon = false;
-    $(this).attr('src', '../../../public/images/menu-icon.png');
     setTimeout(function () {
         if(!mouseInNav) {
+            $(this).attr('src', '../../../public/images/menu-icon.png');
             $(dropdown).animate({top: "-300px"}, 500);
         }
     }, 300);

@@ -6,6 +6,7 @@
 GET     /                                       Application.index
 
 GET     /find                                   Application.viewPerson
+GET     /register                               Accounts.register
 
 # Ignore favicon requests
 GET     /favicon.ico                            404
