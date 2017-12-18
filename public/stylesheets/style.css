@@ -52,7 +52,9 @@ body#home {
     margin-right: 40px;
 }
 
-#home nav a:hover {
+#home nav a:hover,
+#home nav a:active,
+#home nav a:focus {
     text-decoration: none;
 }
 
@@ -726,6 +728,13 @@ body#register {
     color: #e3e3e3;
 }
 
+#register .acct-box form p.input-error {
+    color: #ff0000;
+    float: right;
+    display: inline;
+    margin: 0;
+}
+
 #register .acct-box form input {
     border-radius: 0;
     border: 1px solid #000;
@@ -735,9 +744,19 @@ body#register {
     font-size: 16px;
 }
 
+#register .acct-box form input.invalid {
+    border: 1px solid #ff0000;
+    border-bottom-width: 2px;
+}
+
 #register .acct-box form input:focus {
     border-color: #00ffff;
     box-shadow: 0 0 8px rgba(237, 225, 27, 0.2);
+}
+
+#register .acct-box form input.invalid:focus {
+    border-color: #ff0000;
+    box-shadow: none;
 }
 
 #register .acct-box form button {
@@ -757,4 +776,12 @@ body#register {
 
 #register .acct-box form button:hover {
     background: #99ff00;
+}
+
+#register .acct-box p#submit-invalid {
+    color: #ff0000;
+    margin: 0 0 0 13%;
+    position: relative;
+    top: 10px;
+    display: none;
 }

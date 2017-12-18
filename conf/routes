@@ -7,6 +7,10 @@ GET     /                                       Application.index
 
 GET     /find                                   Application.viewPerson
 GET     /register                               Accounts.register
+GET     /register/welcome                       Accounts.welcomePage
+
+# DB Validation
+GET     /checkusersdb                           Accounts.checkUsersDB
 
 # Ignore favicon requests
 GET     /favicon.ico                            404
