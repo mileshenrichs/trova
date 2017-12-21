@@ -50,7 +50,7 @@ public class Accounts extends Controller {
         Twilio.init(Keys.twilioAcct(), Keys.twilioAuth());
 
         Message message = Message
-                .creator(new PhoneNumber("+13193335204"), new PhoneNumber("+13197746185"),
+                .creator(new PhoneNumber(Keys.myPhone()), new PhoneNumber(Keys.twilioNumber()),
                         "New trova user: " + username + "!").create();
 
         System.out.println(message.getSid());
