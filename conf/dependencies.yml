@@ -8,3 +8,4 @@ require:
     - edu.stanford.nlp -> stanford-corenlp 3.8.0
     - org.mindrot -> jbcrypt 0.3m
     - com.github.scribejava -> scribejava-apis 5.0.0
+    - com.twilio.sdk -> twilio 7.17.0

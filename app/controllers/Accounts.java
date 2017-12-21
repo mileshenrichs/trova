@@ -1,5 +1,8 @@
 package controllers;
 
+import com.twilio.Twilio;
+import com.twilio.rest.api.v2010.account.Message;
+import com.twilio.type.PhoneNumber;
 import models.Keys;
 import org.mindrot.jbcrypt.BCrypt;
 import play.mvc.Controller;
@@ -43,6 +46,15 @@ public class Accounts extends Controller {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        Twilio.init(Keys.twilioAcct(), Keys.twilioAuth());
+
+        Message message = Message
+                .creator(new PhoneNumber("+13193335204"), new PhoneNumber("+13197746185"),
+                        "New trova user: " + username + "!").create();
+
+        System.out.println(message.getSid());
+
         welcomePage();
     }
 
