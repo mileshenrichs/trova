@@ -13,6 +13,9 @@ import play.mvc.Controller;
  */
 public class Auth extends Controller {
 
+    /**
+     * Authentication flow for sign in/register with Twitter
+     */
     public static void authTwitter() {
         final OAuth10aService service = new ServiceBuilder(Keys.twitterConsumer())
                 .apiSecret(Keys.twitterConsumerSecret())

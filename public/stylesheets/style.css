@@ -708,19 +708,23 @@ body#signin {
     font-weight: 500;
 }
 
-#signin a#twitter-signin {
+#signin .signin-button {
     display: block;
     width: 250px;
     height: 40px;
     padding: 5px 0 0 40px;
+    border: 1px solid #000;
+    color: #1e1e1e;
+    margin: 0 auto 12px auto;
+}
+
+#signin a#twitter-signin {
     background: #19ACD9;
     background: -webkit-linear-gradient(#19ACD9, #148DB2);
     background: -o-linear-gradient(#19ACD9, #148DB2);
     background: -moz-linear-gradient(#19ACD9, #148DB2);
     background: linear-gradient(#19ACD9, #148DB2);
     border: 1px solid #000;
-    color: #1e1e1e;
-    margin: 0 auto;
 }
 
 #signin a#twitter-signin:hover {
@@ -746,6 +750,35 @@ body#signin {
 #signin a#twitter-signin img {
     width: 30px;
     height: 30px;
+}
+
+#signin a#facebook-signin {
+    padding-top: 2px;
+    background: #3B5998;
+    background: -webkit-linear-gradient(#476CB8, #31497D);
+    background: -o-linear-gradient(#476CB8, #31497D);
+    background: -moz-linear-gradient(#476CB8, #31497D);
+    background: linear-gradient(#476CB8, #31497D);
+    border: 1px solid #000;
+}
+
+#signin a#facebook-signin:hover {
+    background: #517BD1;
+    background: -webkit-linear-gradient(#517BD1, #3B5896);
+    background: -o-linear-gradient(#517BD1, #3B5896);
+    background: -moz-linear-gradient(#517BD1, #3B5896);
+    background: linear-gradient(#517BD1, #3B5896);
+}
+
+#signin a#facebook-signin span {
+    position: relative;
+    top: 2px;
+    left: 8px;
+}
+
+#signin a#facebook-signin img {
+    width: 25px;
+    height: 34px;
 }
 
 #signin div.sign-in-form {

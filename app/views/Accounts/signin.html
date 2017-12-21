@@ -20,6 +20,71 @@
 </head>
 
 <body id="signin">
+
+<script>
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId      : '1822488754709833',
+            cookie     : true,
+            xfbml      : true,
+            version    : 'v2.11'
+        });
+        FB.getLoginStatus(function(response) {
+            statusChangeCallback(response);
+        });
+    };
+    (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "https://connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+    // This is called with the results from from FB.getLoginStatus().
+    function statusChangeCallback(response) {
+        console.log('statusChangeCallback');
+        console.log(response);
+        // The response object is returned with a status field that lets the
+        // app know the current login status of the person.
+        // Full docs on the response object can be found in the documentation
+        // for FB.getLoginStatus().
+        if (response.status === 'connected') {
+            // Logged into your app and Facebook.
+            testAPI();
+        } else {
+            // The person is not logged into your app or we are unable to tell.
+            console.log('Please login to this app');
+        }
+    }
+
+    // Here we run a very simple test of the Graph API after login is
+    // successful.  See statusChangeCallback() for when this call is made.
+    function testAPI() {
+        console.log('Welcome!  Fetching your information.... ');
+        FB.api('/me?fields=id,name,email,picture.width(800).height(800)', function(response) {
+            console.log(response);
+            console.log('Successful login for: ' + response.name);
+        });
+    }
+
+    // login to FB upon clicking "Sign In With Facebook" button
+    window.onload = function () {
+        document.getElementById('facebook-signin').addEventListener('click', function () {
+            FB.login(function(response) {
+                if (response.status === 'connected') {
+                    console.log('logged in');
+                } else {
+                    console.log('not logged in');
+                }
+                statusChangeCallback(response);
+            }, {
+                returnScopes: true
+            });
+        })
+    };
+</script>
+
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -37,9 +102,13 @@
         <div class="col-lg-12 sign-in-box">
             <div class="col-lg-6">
                 <h1>Register/Log in<br>with social</h1>
-                <a id="twitter-signin" role="button" href="@{Auth.authTwitter()}">
+                <a class="signin-button" id="twitter-signin" role="button" href="@{Auth.authTwitter()}">
                     <img src="../../../public/images/social-media-icons/bw/twitter.png" alt="Twitter Logo" />
                     <span>Sign In With Twitter</span>
+                </a>
+                <a class="signin-button" id="facebook-signin" role="button" href="#">
+                    <img src="../../../public/images/social-media-icons/bw/facebook.png" alt="Facebook Logo" />
+                    <span>Sign In With Facebook</span>
                 </a>
             </div>
 
