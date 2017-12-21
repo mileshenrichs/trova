@@ -6,6 +6,7 @@
 GET     /                                       Application.index
 
 GET     /find                                   Application.viewPerson
+GET     /signin                                 Accounts.signIn
 GET     /register                               Accounts.register
 GET     /register/welcome                       Accounts.welcomePage
 

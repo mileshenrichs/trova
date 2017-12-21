@@ -1,7 +1,6 @@
 package controllers;
 
 import models.Keys;
-import org.codehaus.groovy.runtime.powerassert.SourceText;
 import org.mindrot.jbcrypt.BCrypt;
 import play.mvc.Controller;
 
@@ -13,8 +12,38 @@ import java.sql.*;
  */
 public class Accounts extends Controller {
 
+    public static void signIn() {
+        render();
+    }
+
     public static void register() {
         render();
+    }
+
+    public static void welcomePage() {
+        render();
+    }
+
+    public static void authenticateSignIn(String user, String pass) {
+
+    }
+
+    public static void createAccount(String emailAddress, String username, String password) {
+        // Hash password
+        String hash = BCrypt.hashpw(password, BCrypt.gensalt());
+
+        // Store new user in DB
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/trova?verifyServerCertificate=false&useSSL=true", Keys.dbUsername(), Keys.dbPassword());
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO users (username, email_address, password) VALUES (?, ?, ?)");
+            statement.setString(1, username);
+            statement.setString(2, emailAddress);
+            statement.setString(3, hash);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        welcomePage();
     }
 
     /**
@@ -38,28 +67,6 @@ public class Accounts extends Controller {
         }
 
         renderJSON("{\"entryExists\": " + entryExists + "}");
-    }
-
-    public static void createAccount(String emailAddress, String username, String password) {
-        // Hash password
-        String hash = BCrypt.hashpw(password, BCrypt.gensalt());
-
-        // Store new user in DB
-        try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/trova?verifyServerCertificate=false&useSSL=true", Keys.dbUsername(), Keys.dbPassword());
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO users (username, email_address, password) VALUES (?, ?, ?)");
-            statement.setString(1, username);
-            statement.setString(2, emailAddress);
-            statement.setString(3, hash);
-            statement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        welcomePage();
-    }
-
-    public static void welcomePage() {
-        render();
     }
 
 }
