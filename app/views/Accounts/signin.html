@@ -98,17 +98,28 @@
         </div>
     </div>
 
-    <div class="row animated fadeInUp" id="under-logo">
+    <div class="row#{if fromRegister} animated fadeInUp#{/if}" id="under-logo">
         <div class="col-lg-12 sign-in-box">
             <div class="col-lg-6">
-                <h1>Register/Log in<br>with social</h1>
+                <h1 id="signin-register">Register/Log in<br>with social</h1>
                 <a class="signin-button" id="twitter-signin" role="button" href="@{Auth.authTwitter()}">
                     <img src="../../../public/images/social-media-icons/bw/twitter.png" alt="Twitter Logo" />
-                    <span>Sign In With Twitter</span>
+                    <span>Sign In with Twitter</span>
                 </a>
                 <a class="signin-button" id="facebook-signin" role="button" href="#">
                     <img src="../../../public/images/social-media-icons/bw/facebook.png" alt="Facebook Logo" />
-                    <span>Sign In With Facebook</span>
+                    <span>Sign In with Facebook</span>
+                </a>
+                <a class="signin-button" id="instagram-signin" role="button" href="https://api.instagram.com/oauth/authorize/?client_id=${models.Keys.instagramClient()}&redirect_uri=http%3A%2F%2Flocalhost%3A9000%2Fauth%2Fauthinstagram&response_type=code">
+                    <img src="../../../public/images/social-media-icons/bw/instagram.png" alt="Instagram Logo" />
+                    <span>Sign In with Instagram</span>
+                </a>
+                <div id="register-split">
+                    <p>OR</p>
+                </div>
+                <a class="signin-button" id="email-register" role="button" href="@{Accounts.register()}">
+                    <img src="../../../public/images/social-media-icons/bw/email.png" alt="Email Icon" />
+                    <span>Register with Email</span>
                 </a>
             </div>
 

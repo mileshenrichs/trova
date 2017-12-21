@@ -16,7 +16,8 @@ import java.sql.*;
 public class Accounts extends Controller {
 
     public static void signIn() {
-        render();
+        boolean fromRegister = params.get("fromRegister") == null;
+        render(fromRegister);
     }
 
     public static void register() {

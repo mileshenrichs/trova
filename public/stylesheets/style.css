@@ -703,6 +703,10 @@ body#signin {
     cursor: default;
 }
 
+#signin h1#signin-register {
+    margin-bottom: 23px;
+}
+
 #signin a {
     font-family: 'Quicksand', sans-serif;
     font-weight: 500;
@@ -724,7 +728,6 @@ body#signin {
     background: -o-linear-gradient(#19ACD9, #148DB2);
     background: -moz-linear-gradient(#19ACD9, #148DB2);
     background: linear-gradient(#19ACD9, #148DB2);
-    border: 1px solid #000;
 }
 
 #signin a#twitter-signin:hover {
@@ -759,7 +762,6 @@ body#signin {
     background: -o-linear-gradient(#476CB8, #31497D);
     background: -moz-linear-gradient(#476CB8, #31497D);
     background: linear-gradient(#476CB8, #31497D);
-    border: 1px solid #000;
 }
 
 #signin a#facebook-signin:hover {
@@ -779,6 +781,92 @@ body#signin {
 #signin a#facebook-signin img {
     width: 25px;
     height: 34px;
+}
+
+#signin a#instagram-signin {
+    padding-left: 37px;
+    background: #C033B3;
+    background: -webkit-linear-gradient(#FF8947, #C033B3);
+    background: -o-linear-gradient(#FF8947, #C033B3);
+    background: -moz-linear-gradient(#FF8947, #C033B3);
+    background: linear-gradient(#FF8947, #C033B3);
+}
+
+#signin a#instagram-signin:hover {
+    background: #D438C5;
+    background: -webkit-linear-gradient(#FF9847, #D438C5);
+    background: -o-linear-gradient(#FF9847, #D438C5);
+    background: -moz-linear-gradient(#FF9847, #D438C5);
+    background: linear-gradient(#FF9847, #D438C5);
+}
+
+#signin a#instagram-signin span {
+    position: relative;
+    top: 2px;
+    left: 8px;
+}
+
+#signin a#instagram-signin img {
+    width: 29px;
+    height: 29px;
+}
+
+#signin #register-split:before {
+    content: " ";
+    display: block;
+    position: relative;
+    left: 27%;
+    top: 12px;
+    width: 50px;
+    border-bottom: 1px solid rgba(200, 200, 200, 0.5);
+}
+
+#signin #register-split {
+    font-family: 'Cabin', sans-serif;
+    font-size: 16px;
+    color: #EDEDED;
+    text-align: center;
+    margin: 0;
+    cursor: default;
+}
+
+#signin #register-split:after {
+    content: " ";
+    display: block;
+    position: relative;
+    bottom: 21px;
+    left: 57%;
+    width: 50px;
+    border-bottom: 1px solid rgba(200, 200, 200, 0.5);
+}
+
+#signin a#email-register {
+    padding-left: 37px;
+    padding-top: 7px;
+    background: #BDBDBD;
+    background: -webkit-linear-gradient(#C4C4C4, #737373);
+    background: -o-linear-gradient(#C4C4C4, #737373);
+    background: -moz-linear-gradient(#C4C4C4, #737373);
+    background: linear-gradient(#C4C4C4, #737373);
+}
+
+#signin a#email-register:hover {
+    background: #878787;
+    background: -webkit-linear-gradient(#D6D6D6, #878787);
+    background: -o-linear-gradient(#D6D6D6, #878787);
+    background: -moz-linear-gradient(#D6D6D6, #878787);
+    background: linear-gradient(#D6D6D6, #878787);
+}
+
+#signin a#email-register span {
+    position: relative;
+    top: 2px;
+    left: 6px;
+}
+
+#signin a#email-register img {
+    width: 32px;
+    height: 23px;
 }
 
 #signin div.sign-in-form {
@@ -849,6 +937,11 @@ body#register {
 
 #register p#back-to-login a {
     color: #e3e3e3;
+}
+
+#register p#back-to-login a:active,
+#register p#back-to-login a:focus {
+    text-decoration: none;
 }
 
 #register p#back-to-login a:hover {
