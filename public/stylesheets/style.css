@@ -911,6 +911,111 @@ body#signin {
     background: #F29925;
 }
 
+/* ##################### FAILED SIGN IN ##################### */
+
+body#fail-signin {
+    background: url("../../public/images/invalidsignin/bg.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+#fail-signin .acct-box {
+    width: 600px;
+    margin: 40px auto 30px auto;
+    display: block;
+    float: none;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid #000;
+    padding-bottom: 40px;
+    padding-top: 20px;
+}
+
+#fail-signin .acct-box img {
+    width: 120px;
+    height: 86px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#fail-signin .alert-danger {
+    padding-top: 0;
+    border-top: 3px solid #AD0000;
+    margin: 20px 0 30px 0;
+}
+
+#fail-signin .alert-danger h2 {
+    text-align: center;
+    color: #7A0000;
+}
+
+#fail-signin .alert-danger a {
+    font-weight: bold;
+    color: #850000;
+}
+
+#fail-signin .acct-box form {
+    width: 75%;
+    float: none;
+    margin: 0 auto;
+}
+
+#fail-signin .acct-box form label {
+    color: #e3e3e3;
+}
+
+#fail-signin .acct-box form p.input-error {
+    color: #ff0000;
+    float: right;
+    display: inline;
+    margin: 0;
+}
+
+#fail-signin .acct-box form input {
+    border-radius: 0;
+    border: 1px solid #000;
+    height: 40px;
+    color: #000;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 16px;
+}
+
+#fail-signin .acct-box form input.invalid {
+    border: 1px solid #ff0000;
+    border-bottom-width: 2px;
+}
+
+#fail-signin .acct-box form input:focus {
+    border-color: #00ffff;
+    box-shadow: 0 0 8px rgba(237, 225, 27, 0.2);
+}
+
+#fail-signin .acct-box form input.invalid:focus {
+    border-color: #ff0000;
+    box-shadow: none;
+}
+
+#fail-signin #sign-in-form button {
+    margin: 25px auto 0 auto;
+    float: none;
+    display: block;
+    border-radius: 0;
+    color: #101010;
+    background-color: #D88821;
+    border: 1px solid #000;
+    height: 44px;
+    width: 150px;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 500;
+    font-size: 17px;
+}
+
+#fail-signin #sign-in-form button:hover {
+    background: #F29925;
+}
+
 /* ##################### REGISTER ##################### */
 
 body#register {

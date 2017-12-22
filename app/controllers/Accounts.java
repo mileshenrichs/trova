@@ -8,6 +8,8 @@ import org.mindrot.jbcrypt.BCrypt;
 import play.mvc.Controller;
 
 import java.sql.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by Henrichs on 12/2/2017.
@@ -20,6 +22,15 @@ public class Accounts extends Controller {
         render(fromRegister);
     }
 
+    /**
+     * Full-screen login page displayed when incorrect login credentials are provided
+     * @param err String describing type of error (username, email, or pass)
+     * @param u String containing valid username/email if applicable
+     */
+    public static void invalidSignIn(String err, String u) {
+        render(err, u);
+    }
+
     public static void register() {
         render();
     }
@@ -29,7 +40,32 @@ public class Accounts extends Controller {
     }
 
     public static void authenticateSignIn(String user, String pass) {
+        Pattern emailPattern = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+        Matcher emailMatcher = emailPattern.matcher(user);
+        String idType = emailMatcher.find() ? "email_address" : "username";
 
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/trova?verifyServerCertificate=false&useSSL=true", Keys.dbUsername(), Keys.dbPassword());
+            PreparedStatement statement = connection.prepareStatement("SELECT password FROM users WHERE " + idType + " = ? LIMIT 1");
+            statement.setString(1, user);
+            ResultSet results = statement.executeQuery();
+            boolean validLogin = false;
+            // username or email exists in DB
+            if(results.next()) {
+                validLogin = BCrypt.checkpw(pass, results.getString("password"));
+                if(validLogin) {
+                    // user is authenticated
+                    welcomePage();
+                } else {
+                    invalidSignIn("pass", user);
+                }
+            } else {
+                // username or email non-existent
+                invalidSignIn(idType, null);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void createAccount(String emailAddress, String username, String password) {
